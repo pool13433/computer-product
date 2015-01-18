@@ -139,7 +139,7 @@ function login() {
     var username = $('#input-username').val();
     var password = $('#input-password').val();
     $.ajax({
-        url: './action/person.php?method=login',
+        url: './method/person.php?method=login',
         data: {
             username: username,
             password: password
