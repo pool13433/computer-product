@@ -18,7 +18,7 @@ $(document).ready(function() {
         showColumns: true,
         showRefresh: true,
         minimumCountColumns: 2,
-        clickToSelect: true,
+        //clickToSelect: true,
         // extension export 
         /*showExport : true, 
          exportTypes : ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],

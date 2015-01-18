@@ -1,10 +1,10 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-warning-sign"></i> รายการ ปัญหา/อาการเสีย
+            <i class="glyphicon glyphicon-th-large"></i> รายการ ปัญหา/สาเหตุ อาการเครื่อง
         </h4>
         <div class="btn-group pull-right">
-            <a href="index.php?page=frm-brand" class="btn btn-info">
+            <a href="index.php?page=frm-problem" class="btn btn-info">
                 <i class="glyphicon glyphicon-plus-sign"></i> สร้าง
             </a>
         </div>
@@ -26,26 +26,26 @@
                 <tbody>
                     <?php
                     include '../config/connect.php';
-                    $sql_brand = "SELECT * FROM brand b";
-                    $sql_brand .= " JOIN person p ON p.per_id = b.bra_updateby";
-                    $sql_brand .= " ORDER BY b.bra_id";
-                    $query_brand = mysql_query($sql_brand) or die(mysql_error());
+                    $sql_problem = "SELECT * FROM problem b";
+                    $sql_problem .= " JOIN person p ON p.per_id = b.prob_updateby";
+                    $sql_problem .= " ORDER BY b.prob_id";
+                    $query_problem = mysql_query($sql_problem) or die(mysql_error());
                     $row = 1;
-                    while ($data = mysql_fetch_array($query_brand)):
+                    while ($data = mysql_fetch_array($query_problem)):
                         ?>
                         <tr>
                             <td><?= $row ?></td>
-                            <td><?= $data['bra_nameth'] ?></td>
-                            <td><?= $data['bra_nameeng'] ?></td>
-                            <td><?= format_date('d/m/Y', $data['bra_updatedate']) ?></td>
+                            <td><?= $data['prob_name'] ?></td>
+                            <td><?= $data['prob_desc'] ?></td>
+                            <td><?= format_date('d/m/Y', $data['prob_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-brand&id=<?= $data['bra_id'] ?>" class="btn btn-primary">
+                                <a href="index.php?page=frm-problem&id=<?= $data['prob_id'] ?>" class="btn btn-warning">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../action/brand.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['prob_id'] ?>, '../method/problem.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>

@@ -48,10 +48,10 @@
         <?php include './menu-top.php'; ?>
         <div class="container">            
             <div class="row row-offcanvas row-offcanvas-right">
-                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar-offcanvas" id="sidebar">
                     <?php include './menu-left.php';?>
-                </div>
-                <div class="col-xs-12 col-sm-9">
+                </div>                
+                <div class="col-xs-12 col-sm-9"> 
                     <?php
                     include '../config/webapp.php';
                     // ตรวจสอบ ค่า ว่ามีการส่งค่ามาหรือเปล่า

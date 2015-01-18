@@ -40,7 +40,7 @@
                             <td><?= format_date('d/m/Y', $data['bra_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-brand&id=<?= $data['bra_id'] ?>" class="btn btn-primary">
+                                <a href="index.php?page=frm-brand&id=<?= $data['bra_id'] ?>" class="btn btn-warning">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>

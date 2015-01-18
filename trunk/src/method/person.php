@@ -47,18 +47,18 @@ switch ($_GET['method']) {
     case 'create':
         if (!empty($_POST)):
             // ########### variable ##########
-            $per_id = $_POST['per_id'];
-            $per_fname = $_POST['per_fname'];
-            $per_lname = $_POST['per_lname'];
-            $per_username = $_POST['per_username'];
-            $per_password = $_POST['per_password'];
-            $per_idcard = $_POST['per_idcard'];
-            $per_address = $_POST['per_address'];
-            $per_mobile = $_POST['per_mobile'];
-            $per_email = $_POST['per_email'];
-            $per_status = $_POST['per_status'];
+            $per_id = $_POST['input-id'];
+            $per_fname = $_POST['input-fname'];
+            $per_lname = $_POST['input-lname'];
+            $per_username = $_POST['input-username'];
+            $per_password = $_POST['input-password'];
+            $per_idcard = $_POST['input-idcard'];
+            $per_address = $_POST['input-address'];
+            $per_mobile = $_POST['input-mobile'];
+            $per_email = $_POST['input-email'];
+            $per_status = $_POST['combo-person'];
             // ########### variable ##########
-            if (empty($_POST['id'])): // insert
+            if (empty($_POST['input-id'])): // insert
                 $sql = " INSERT INTO `person`(";
                 $sql .= "  `per_fname`,";
                 $sql .= " `per_lname`, `per_username`, `per_password`,";
@@ -97,6 +97,13 @@ switch ($_GET['method']) {
             else:
                 echo returnJson('danger', 'error', $msg, '');
             endif;
+        endif;
+        break;
+    case 'delete':
+        $id = $_POST['id'];
+        $query = mysql_query("DELETE FROM person WHERE per_id = $id") or die(mysql_error());
+        if($query):
+            echo returnJson('success', 'information', 'ลบข้อมูลสำเร็จ', '');
         endif;
         break;
     default:
