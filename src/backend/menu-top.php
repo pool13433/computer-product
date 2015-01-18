@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,10 +10,10 @@
             <a class="navbar-brand" href="#">ระบบซ่อมคอมพิวเตอร์ออนไลน์</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="glyphicon glyphicon-lock"></i> เปลี่ยนรหัสผ่าน</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-user"></i> ประวัติส่วนตัว</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> ออกจากระบบ</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->

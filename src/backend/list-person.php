@@ -15,8 +15,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>ชื่อไทย</th>
-                        <th>ชื่ออังกฤษ</th>
+                        <th>ชื่อ</th>
+                        <th>นามสกุล</th>
+                        <th>สถานะ</th>
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
                         <th>แก้ไข</th>
@@ -26,26 +27,26 @@
                 <tbody>
                     <?php
                     include '../config/connect.php';
-                    $sql_brand = "SELECT * FROM brand b";
-                    $sql_brand .= " JOIN person p ON p.per_id = b.bra_updateby";
-                    $sql_brand .= " ORDER BY b.bra_id";
+                    $sql_brand = "SELECT * FROM person pp";                    
+                    $sql_brand .= " ORDER BY pp.per_id";
                     $query_brand = mysql_query($sql_brand) or die(mysql_error());
                     $row = 1;
                     while ($data = mysql_fetch_array($query_brand)):
                         ?>
                         <tr>
                             <td><?= $row ?></td>
-                            <td><?= $data['bra_nameth'] ?></td>
-                            <td><?= $data['bra_nameeng'] ?></td>
-                            <td><?= format_date('d/m/Y', $data['bra_updatedate']) ?></td>
+                            <td><?= $data['per_fname'] ?></td>
+                            <td><?= $data['per_lname'] ?></td>
+                            <td><?= Get_Person($data['per_status']) ?></td>
+                            <td><?= format_date('d/m/Y', $data['per_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-brand&id=<?= $data['bra_id'] ?>" class="btn btn-primary">
+                                <a href="index.php?page=frm-person&id=<?= $data['per_id'] ?>" class="btn btn-warning">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../action/brand.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['per_id'] ?>, '../method/person.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>
