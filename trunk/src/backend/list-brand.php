@@ -1,7 +1,7 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-th-large"></i> รายการ ยี้ห้อโทรศัพท์
+            <i class="glyphicon glyphicon-th-large"></i> รายการ ยี้ห้อเครื่องคอมพิวเตอร์
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=frm-brand" class="btn btn-info">
@@ -45,7 +45,7 @@
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../action/brand.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../method/brand.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>

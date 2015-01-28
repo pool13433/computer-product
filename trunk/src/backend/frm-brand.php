@@ -15,7 +15,7 @@ if (!empty($_GET['id'])) {
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-th-large"></i> ยี้ห้อสินค้า
+            <i class="glyphicon glyphicon-th-large"></i> ยี้ห้อเครื่องคอมพิวเตอร์
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=list-brand" class="btn btn-warning">

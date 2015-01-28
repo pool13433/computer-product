@@ -5,11 +5,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
-        <link rel="stylesheet" href="../../lib/bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../../lib/bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.min.css"/>        
 
         <!-- jquery -->
         <script type="text/javascript" src="../../js/jquery.js"></script>
         <!-- jquery -->
+
+        <!-- bootstrap-->
+        <script type="text/javascript" src="../../lib/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.min.js"></script>
+        <!-- bootstrap-->
 
         <!-- datepicker-->
         <link rel="stylesheet" href="../../lib/bootstrap-datepicker/css/datepicker.css"/>
@@ -34,10 +38,23 @@
         <!-- dataatble -->
 
         <!-- pnotify -->
-        <link rel="stylesheet" type="text/css" href="../../css/pnotify.custom.min.css">      
-        <script language="JavaScript" src="../../js/pnotify.custom.min.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="../../css/pnotify.custom.min.css">      
+        <script language="JavaScript" src="../../js/pnotify.custom.min.js"></script>-->
+        <link rel="stylesheet" href="../../lib/jAlert-master/jAlert-v2-min.css"/>
+        <script type="text/javascript" src="../../lib/jAlert-master/jAlert-v2-min.js"></script>
         <!-- pnotify -->
+        
+         <!-- datepicker-->
+        <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-datepicker/css/datepicker.css"/>
+        <script type="text/javascript" src="../../lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <!-- datepicker-->
 
+        <!-- select 2-->
+        <link rel="stylesheet" href="../../lib/select2-3.5.0/select2-bootstrap.css"/>
+        <link rel="stylesheet" href="../../lib/select2-3.5.0/select2.css"/>
+        <script src="../../lib/select2-3.5.0/select2.min.js" type="text/javascript"></script>
+        <!-- select 2-->
+        
         <!-- tempate-->        
         <link rel="stylesheet" href="../../css/offcanvas.css"/>
         <script type="text/javascript" src="../../js/offcanvas.js"></script>
@@ -45,26 +62,38 @@
         <script type="text/javascript" src="../../js/script.js"></script>
     </head>
     <body>
+        <?php
+         include '../config/webapp.php';
+        if (!isset($_SESSION)) {
+            @ob_start();
+            @session_start();
+        }
+        ?>
         <?php include './menu-top.php'; ?>
         <div class="container">            
             <div class="row row-offcanvas row-offcanvas-right">
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar-offcanvas" id="sidebar">
-                    <?php include './menu-left.php';?>
+                    <?php include './menu-left.php'; ?>
                 </div>                
                 <div class="col-xs-12 col-sm-9"> 
                     <?php
-                    include '../config/webapp.php';
-                    // ตรวจสอบ ค่า ว่ามีการส่งค่ามาหรือเปล่า
-                    if (!empty($_GET)) {  // มีค่า
-                        $page = $_GET['page'] . '.php';
-                        if (file_exists($page)) {
-                            include $page;
+                    // ตรวจสอบ login 
+                    if (empty($_SESSION)):  // login fail
+                        header('Location: http://localhost/computer/src/');
+                        exit();
+                    else: // login OK                       
+                        // ตรวจสอบ ค่า ว่ามีการส่งค่ามาหรือเปล่า
+                        if (!empty($_GET)) {  // มีค่า
+                            $page = $_GET['page'] . '.php';
+                            if (file_exists($page)) {
+                                include $page;
+                            } else {
+                                echo msgBox('danger', 'ไม่พบหน้าที่เรียก 404 File not Found');
+                            }
                         } else {
-                            echo msgBox('danger', 'ไม่พบหน้าที่เรียก 404 File not Found');
+                            include MAINPAGE;
                         }
-                    } else {
-                        include MAINPAGE;
-                    }
+                    endif;
                     ?>
                 </div>                
             </div>            

@@ -26,17 +26,26 @@ $(document).ready(function() {
          flat : true,*/
     });
     // ########### datepicker ##########
+    $.fn.datepicker.defaults.format = "dd-mm-yyyy";
     var today = new Date();
-    var current = today.toLocaleFormat('DD/MM/YYYY');
+    var current = today.toLocaleFormat('DD-MM-YYYY');
     // set current date
-    var datepicker = $('#datetext').datepicker("setDate", current);
-    datepicker.datepicker({
-        autoclose: true,
-        format: "dd/mm/yyyy",
+    var datepicke_1 = $('#datetext_1').datepicker("setDate", current);
+    datepicke_1.on('changeDate', function(ev) {
+        $(this).datepicker('hide');
     });
-    datepicker.off('focus');
-    $('#datebtn').click(function() {
-        datepicker.datepicker('show');
+    datepicke_1.off('focus');
+    $('#datebtn_1').click(function() {
+        datepicke_1.datepicker('show');
+    });
+
+    var datepicker_2 = $('#datetext_2').datepicker("setDate", current);
+    datepicker_2.on('changeDate', function(ev) {
+        $(this).datepicker('hide');
+    });
+    datepicker_2.off('focus');
+    $('#datebtn_2').click(function() {
+        datepicker_2.datepicker('show');
     });
     // ########### datepicker ##########
 });
@@ -152,10 +161,12 @@ function login() {
                 setCookie('username', username, 365);
                 setCookie('password', password, 365);
 
-                showNotification('success', data.title, data.msg, 3);
+                //showNotification('success', data.title, data.msg, 3);
+                showJAlert(data.title, data.msg, 'success');
                 redirectDelay(data.url, 2);
             } else {
-                showNotification('danger', data.title, data.msg, 3);
+                showJAlert(data.title, data.msg, 'error');
+                //showNotification('danger', data.title, data.msg, 3);
             }
         }
     });
@@ -163,9 +174,11 @@ function login() {
 function logout() {
     var conf = confirm('ยืนยันการออกจากระบบ ใช่ [OK] || ไม่ใช่ [Cancle]');
     if (conf) {
-        $.post('../action/person.php?method=logout', {}, function() {
-            redirectDelay('../index.php', 1);
-        });
+        $.post('../method/person.php?method=logout', {}, function(data) {
+            if (data.status == 'success') {
+                redirectDelay('../index.php', 1);
+            }
+        }, 'json');
         return true;
     }
     return false;
@@ -206,9 +219,9 @@ function post_form(formid, url) {
         type: 'post',
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
-            showNotification(data.status, data.title, data.msg, 2);
+            showJAlert(data.title, data.msg, data.status)
             if (data.status == 'success') {
-                redirectDelay(data.url, 2);
+                redirectDelay(data.url, 1);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -225,11 +238,9 @@ function delete_data(id, url) {
             type: 'post',
             dataType: 'json',
             success: function(data) {
+                showJAlert(data.title, data.msg, data.status);
                 if (data.status == 'success') {
-                    showNotification('success', data.title, data.msg, 3);
-                    reloadDelay(2);
-                } else {
-                    showNotification('danger', data.title, data.msg, 3);
+                    reloadDelay(1);
                 }
             }
         });
@@ -237,5 +248,25 @@ function delete_data(id, url) {
     }
     return false;
 }
+
+function showJAlert(title, msg, theme) {
+    $.fn.jAlert({
+        'title': title,
+        'message': msg,
+        'theme': theme, // info,error,success,dark,...
+    });
+}
+function find_model(element) {
+        var brand_id = element.value;
+        $.post('../method/model.php?method=find_model', {brand: brand_id}, function(data) {
+            var model = $('select[name=combo-model]');
+            model.children().remove();
+            $.each(data, function(index, value) {
+                model.append('<option value=' + value.mod_id + '>' + value.mod_nameth + '</option>');
+            });
+        }, 'json');
+    }
+
+
 
 

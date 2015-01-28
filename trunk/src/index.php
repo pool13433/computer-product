@@ -11,15 +11,16 @@
         <script type="text/javascript" src="../js/jquery.js"></script>
         <!-- jquery -->
         
+         <!-- bootstrap-->
+        <script type="text/javascript" src="../lib/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.min.js"></script>
+        <!-- bootstrap-->
+        
         <!-- datepicker-->
         <link rel="stylesheet" href="../lib/bootstrap-datepicker/css/datepicker.css"/>
         <script type="text/javascript" src="../lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <!-- datepicker-->
 
-        <!-- notify -->
-        <link rel="stylesheet" href="../lib/bootstrap-notify-master/css/bootstrap-notify.css"/>
-        <script type="text/javascript" src="../lib/bootstrap-notify-master/js/bootstrap-notify.js"></script>
-        <!-- notify -->
+        
 
         <!-- validationEngine-->
         <link rel="stylesheet" href="../lib/validationengine/css/validationEngine.jquery.css"/>
@@ -34,8 +35,10 @@
         <!-- dataatble -->
         
         <!-- pnotify -->
-        <link rel="stylesheet" type="text/css" href="../css/pnotify.custom.min.css">      
-        <script language="JavaScript" src="../js/pnotify.custom.min.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="../css/pnotify.custom.min.css">      
+        <script language="JavaScript" src="../js/pnotify.custom.min.js"></script>-->
+        <link rel="stylesheet" href="../lib/jAlert-master/jAlert-v2-min.css"/>
+        <script type="text/javascript" src="../lib/jAlert-master/jAlert-v2-min.js"></script>
         <!-- pnotify -->
         
         <!-- -->
