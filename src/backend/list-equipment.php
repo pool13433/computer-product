@@ -4,7 +4,7 @@
             <i class="glyphicon glyphicon-folder-close"></i> รายการ อุปกรณ์
         </h4>
         <div class="btn-group pull-right">
-            <a href="index.php?page=frm-brand" class="btn btn-info">
+            <a href="index.php?page=frm-equipment" class="btn btn-info">
                 <i class="glyphicon glyphicon-plus-sign"></i> สร้าง
             </a>
         </div>
@@ -15,8 +15,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>ชื่อไทย</th>
-                        <th>ชื่ออังกฤษ</th>
+                        <th>ชื่อ</th>
+                        <th>อธิบาย</th>
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
                         <th>แก้ไข</th>
@@ -26,26 +26,31 @@
                 <tbody>
                     <?php
                     include '../config/connect.php';
-                    $sql_brand = "SELECT * FROM brand b";
-                    $sql_brand .= " JOIN person p ON p.per_id = b.bra_updateby";
-                    $sql_brand .= " ORDER BY b.bra_id";
-                    $query_brand = mysql_query($sql_brand) or die(mysql_error());
+                    $sql_equipment = "SELECT * FROM equipment e";
+                    $sql_equipment .= " LEFT JOIN brand b ON b.bra_id = e.bra_id";
+                    $sql_equipment .= " LEFT JOIN model m ON m.mod_id = e.mod_id";
+                    $sql_equipment .= " LEFT JOIN color c ON c.col_id = e.col_id";
+                    $sql_equipment .= " JOIN person p ON p.per_id = e.equ_updateby";
+                    $sql_equipment .= " ORDER BY e.equ_id";
+                    $query_equipment = mysql_query($sql_equipment) or die(mysql_error());
                     $row = 1;
-                    while ($data = mysql_fetch_array($query_brand)):
+                    while ($data = mysql_fetch_array($query_equipment)):
                         ?>
                         <tr>
                             <td><?= $row ?></td>
-                            <td><?= $data['bra_nameth'] ?></td>
-                            <td><?= $data['bra_nameeng'] ?></td>
-                            <td><?= format_date('d/m/Y', $data['bra_updatedate']) ?></td>
+                            <td><?= $data['equ_name'] ?></td>
+                            <td>
+                                <textarea class="form-control"><?= 'ยี้ห้อ : ' . $data['bra_nameth'] . '  รุ่น : '.$data['mod_nameth'] ?></textarea>
+                            </td>
+                            <td><?= format_date('d/m/Y', $data['equ_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-brand&id=<?= $data['bra_id'] ?>" class="btn btn-primary">
+                                <a href="index.php?page=frm-equipment&id=<?= $data['equ_id'] ?>" class="btn btn-primary">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../action/brand.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['equ_id'] ?>, '../method/equipment.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>

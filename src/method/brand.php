@@ -37,7 +37,7 @@ switch ($_GET['method']) {
             if ($query) {
                 echo returnJson('success', $title, $msg, 'index.php?page=list-brand');
             } else {
-                echo returnJson('danger', $title, $msg, '');
+                echo returnJson('error', $title, $msg, '');
             }
         }
         break;

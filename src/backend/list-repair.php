@@ -45,7 +45,7 @@
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../action/brand.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['bra_id'] ?>, '../method/brand.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>
