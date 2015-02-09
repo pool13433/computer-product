@@ -17,7 +17,9 @@
         </button>
         <hr/>
         <div style="text-align: center">
-            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-question-sign"></i> ลืมรหัสผ่าน</button>
+            <a href="javascript:void(0)" class="btn btn-info btn-sm">
+                <i class="glyphicon glyphicon-question-sign"></i> ลืมรหัสผ่าน
+            </a>
             ||
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-register">
                 <i class="glyphicon glyphicon-registration-mark"></i> ลงทะเบียนใหม่
@@ -25,7 +27,7 @@
         </div>
     </form>
 </div>
-<?php include './modal/modal_register.php';?>
+<?php include './modal/modal_register.php'; ?>
 <script type="text/javascript">
     $(document).ready(function() {
         var valid = $('#frm-login').validationEngine('attach', {

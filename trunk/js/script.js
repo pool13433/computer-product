@@ -26,11 +26,17 @@ $(document).ready(function() {
          flat : true,*/
     });
     // ########### datepicker ##########
-    $.fn.datepicker.defaults.format = "dd-mm-yyyy";
+    var default_date1 = $('#datetext_1');
+    if (default_date1.val() != '') {
+        default_date1.datepicker("setDate", default_date1.val());
+    } else {
+        $.fn.datepicker.defaults.format = "dd-mm-yyyy";
+    }
     var today = new Date();
     var current = today.toLocaleFormat('DD-MM-YYYY');
     // set current date
-    var datepicke_1 = $('#datetext_1').datepicker("setDate", current);
+    var datepicke_1 = default_date1.datepicker("setDate", current);
+
     datepicke_1.on('changeDate', function(ev) {
         $(this).datepicker('hide');
     });
@@ -257,15 +263,15 @@ function showJAlert(title, msg, theme) {
     });
 }
 function find_model(element) {
-        var brand_id = element.value;
-        $.post('../method/model.php?method=find_model', {brand: brand_id}, function(data) {
-            var model = $('select[name=combo-model]');
-            model.children().remove();
-            $.each(data, function(index, value) {
-                model.append('<option value=' + value.mod_id + '>' + value.mod_nameth + '</option>');
-            });
-        }, 'json');
-    }
+    var brand_id = element.value;
+    $.post('../method/model.php?method=find_model', {brand: brand_id}, function(data) {
+        var model = $('select[name=combo-model]');
+        model.children().remove();
+        $.each(data, function(index, value) {
+            model.append('<option value=' + value.mod_id + '>' + value.mod_nameth + '</option>');
+        });
+    }, 'json');
+}
 
 
 

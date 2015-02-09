@@ -1,10 +1,10 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อมเข้า    
+            <i class="glyphicon glyphicon-th-large"></i> รายการ อุปกรณ์เสริมที่ติดเครื่องซ่อม
         </h4>
         <div class="btn-group pull-right">
-            <a href="index.php?page=frm-repair_in   " class="btn btn-info">
+            <a href="index.php?page=frm-accessory" class="btn btn-info">
                 <i class="glyphicon glyphicon-plus-sign"></i> สร้าง
             </a>
         </div>
@@ -15,8 +15,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>ชื่อไทย</th>
-                        <th>ชื่ออังกฤษ</th>
+                        <th>ชื่อ</th>
+                        <th>ชื่ออธิบาย</th>
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
                         <th>แก้ไข</th>
@@ -26,26 +26,26 @@
                 <tbody>
                     <?php
                     include '../config/connect.php';
-                    $sql_repair_in = "SELECT * FROM repair_in ri";
-                    $sql_repair_in .= " JOIN person p ON p.per_id = ri.repin_updateby";
-                    $sql_repair_in .= " ORDER BY ri.repin_id";
-                    $query_repair_in = mysql_query($sql_repair_in) or die(mysql_error());
+                    $sql_accessory = "SELECT * FROM accessory b";
+                    $sql_accessory .= " JOIN person p ON p.per_id = b.acc_updateby";
+                    $sql_accessory .= " ORDER BY b.acc_id";
+                    $query_accessory = mysql_query($sql_accessory) or die(mysql_error());
                     $row = 1;
-                    while ($data = mysql_fetch_array($query_repair_in)):
+                    while ($data = mysql_fetch_array($query_accessory)):
                         ?>
                         <tr>
                             <td><?= $row ?></td>
-                            <td><?= $data['repin_nameth'] ?></td>
-                            <td><?= $data['repin_nameeng'] ?></td>
-                            <td><?= format_date('d/m/Y', $data['repin_updatedate']) ?></td>
+                            <td><?= $data['acc_name'] ?></td>
+                            <td><?= $data['acc_desc'] ?></td>
+                            <td><?= format_date('d/m/Y', $data['acc_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-repair_in&id=<?= $data['repin_id'] ?>" class="btn btn-primary">
+                                <a href="index.php?page=frm-accessory&id=<?= $data['acc_id'] ?>" class="btn btn-warning">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['repin_id'] ?>, '../method/repair_in.php?method=delete')">
+                                <button type="button" class="btn btn-danger" onclick="delete_data(<?= $data['acc_id'] ?>, '../method/accessory.php?method=delete')">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>
