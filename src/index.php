@@ -41,6 +41,11 @@
         <script type="text/javascript" src="../lib/jAlert-master/jAlert-v2-min.js"></script>
         <!-- pnotify -->
         
+        <!-- datepicker-->
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap-datepicker/css/datepicker.css"/>
+        <script type="text/javascript" src="../lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <!-- datepicker-->
+        
         <!-- -->
         <script type="text/javascript" src="../js/script.js"></script>
     </head>

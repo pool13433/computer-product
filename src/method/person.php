@@ -74,7 +74,7 @@ switch ($_GET['method']) {
             $sql .= " '$per_idcard','$per_address','$per_mobile',";
             $sql .= " '$per_email',NOW(),";
             $sql .= " 0,NOW(),";
-            $sql .= " 0,0";
+            $sql .= " 0,1";
             $sql .= " )";
             $msg = 'ลงทะเบียนผู้ใช้งานใหม่ สำเร็จ กรุณา ล๊อกอินเข้าสู่ระบบ';
 
