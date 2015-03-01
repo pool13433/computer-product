@@ -18,7 +18,9 @@
     <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-sort-by-attributes"></i> เกี่ยวกับใบซ่อม</a>
     <a href="index.php?page=list-problem" class="list-group-item"><i class="glyphicon glyphicon-warning-sign"></i> รายการ ปัญหา/สาเหตุ</a>        
     <a href="index.php?page=list-accessory" class="list-group-item"><i class="glyphicon glyphicon-asterisk"></i> รายการ อุปกรณ์เสริมที่ติดเครื่องมา</a>        
-    <a href="index.php?page=list-repair" class="list-group-item"><i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อม</a>        
+    <a href="index.php?page=list-repair" class="list-group-item"><i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อมเข้า</a>        
+    <a href="index.php?page=list-repairman" class="list-group-item"><i class="glyphicon glyphicon-wrench"></i> รายการ ใบซ่อมช่าง</a>        
+    <a href="index.php?page=list-repair_finish" class="list-group-item"><i class="glyphicon glyphicon-ok-circle"></i> รายการ ซ่อมเสร็จแล้ว</a>        
     <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-sort-by-attributes"></i> เกี่ยวกับรายงาน</a>
     <a href="index.php?page=report-1" class="list-group-item"><i class="glyphicon glyphicon-calendar"></i> รายงาน 1</a> 
     <a href="index.php?page=report-2" class="list-group-item"><i class="glyphicon glyphicon-calendar"></i> รายงาน 2</a> 
