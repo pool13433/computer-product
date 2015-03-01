@@ -1,6 +1,10 @@
 <?php
 
 define('MAINPAGE', 'login.php');
+//1= employee,2=repairer,3=customer
+define('EMPLOYEE', 1);
+define('REPAIRNAME', 2);
+define('CUSTOMER', 3);
 
 function msgBox($type, $msg) {
     return '<div class="alert alert-' . $type . '" role="alert">' . $msg . '</div>';
@@ -18,12 +22,31 @@ function returnJson($status, $title, $msg, $url) {
 
 function List_RepairStatus() {
     return array(
-        '0' => 'รอประเมินราคา',
-        '1' => 'ประเมินราคาเสร็จสิ้น',
-        '2' => 'รอซ่อม',
-        '3' => 'ซ่อมเสร็จ สำเร็จ',
-        '4' => 'ซ่อมไม่ได้ เกิดปัญหา',
-    );    
+        '0' => 'รอมอบหมายช่าง',
+        '1' => 'มอบหมายช่าง รอประเมินราคา',
+        '2' => 'ประเมินราคา เสร็จสิ้น',
+        '3' => 'ประเมินราคา ไม่ผ่าน (ไม่สามารถซ่อมได้)',
+        '4' => 'อนุมัติการซ่อม',
+        '5' => 'ไม่อนุมัติการซ่อม',
+        '6' => 'กำลังซ่อม',        
+        '7' => 'ซ่อมเสร็จ สำเร็จ',
+        '8' => 'ซ่อมไม่ได้ เกิดปัญหา',
+        '9' => 'รับเครื่องเสร็จสิ้น ปิดการซ่อม',
+    );
+}
+function List_RepairStatusBG() {
+    return array(
+        '0' => 'warning',
+        '1' => 'success',
+        '2' => 'success',
+        '3' => 'danger',
+        '4' => 'success',
+        '5' => 'danger',
+        '6' => 'info',        
+        '7' => 'success',
+        '8' => 'danger',
+        '9' => 'success',
+    );
 }
 
 function List_PersonStatus() {
@@ -96,6 +119,10 @@ function Get_Day($params) {
         endforeach;
         return $result;
     endif;
+}
+
+function generateNextNumber($value, $digit, $prefix) {
+    return $prefix . str_pad((intval($value)+1), $digit, "0", STR_PAD_LEFT);
 }
 
 function change_dateDMY_TO_YMD($beforDate) {

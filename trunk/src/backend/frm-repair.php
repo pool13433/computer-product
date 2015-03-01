@@ -12,6 +12,8 @@ $per_address = '';
 $brand = '';
 $model = '';
 $problem_other = '';
+$payment = '';
+$serial_number = '';
 $createdate = '';
 $createby = '';
 $updatedate = '';
@@ -34,14 +36,20 @@ if (!empty($_GET['id'])) {
     $per_idcard = $data['per_idcard'];
     $brand = $data['bra_id'];
     $model = $data['mod_id'];
+    $serial_number = $data['rep_serial_number'];
     $problem_other = $data['rep_problem_other'];
+    $payment = $data['rep_payment'];
     $createdate = $data['rep_createdate'];
     $createby = $data['rep_createby'];
     $updatedate = $data['rep_updatedate'];
     $updateby = $data['rep_updateby'];
     $status = $data['rep_status'];
 }
-//echo 'createdate ::=='.  format_date('d-m-Y', $repair_createdate);
+if (empty($code)) {
+    $query_auto = mysql_query('SELECT rep_id FROM repair ORDER BY rep_id DESC limit 0,1') or die(mysql_error());
+    $result = mysql_fetch_assoc($query_auto);
+    $code = generateNextNumber($result['rep_id'], 8, 'RP');
+}
 ?>
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
@@ -63,8 +71,9 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-code" class="col-sm-2 control-label">เลขที่ใบซ่อม</label>
                     <div class="col-sm-3">
-                        <input type="hidden" name="equ_id" value="<?= $id ?>"/>
-                        <input type="text" class="form-control validate[required]" 
+                        <input type="hidden" name="input-id" id="input-id" value="<?= $id ?>"/>
+                        <input type="text" class="form-control" 
+                               data-validation-engine="validate[required]"
                                data-errormessage-value-missing="กรุณากรอก เลขที่ใบซ่อม" value="<?= $code ?>"
                                name="input-code" id="input-code"/>
                     </div>
@@ -72,7 +81,8 @@ if (!empty($_GET['id'])) {
                     <label for="input-createdate" class="col-sm-2 control-label">วันที่ซ่อม</label>
                     <div class="col-sm-3 input-append date">
                         <div class="input-group">
-                            <input type="text" class="form-control validate[required]"
+                            <input type="text" class="form-control" data-date-format="dd/mm/yyyy"
+                                   data-validation-engine="validate[required]"
                                    data-errormessage-value-missing="กรุณากรอก วันที่ซ่อม" value="<?= format_date('d-m-Y', $repair_createdate) ?>"
                                    name="input-createdate" id="datetext_1" readonly/>
                             <span class="input-group-btn">
@@ -89,14 +99,16 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-fname" class="col-sm-2 control-label">ชื่อ</label>
                     <div class="col-sm-3">
-                        <input type="hidden" name="input-per_id" value="<?=$per_id?>"/>
-                        <input type="text" class="form-control validate[required]" 
+                        <input type="hidden" name="input-per_id" value="<?= $per_id ?>"/>
+                        <input type="text" class="form-control" 
+                               data-validation-engine="validate[required]"
                                data-errormessage-value-missing="กรุณากรอก ชื่อ" value="<?= $per_fname ?>"
                                name="input-fname" id="input-fname"/>
                     </div>
                     <label for="input-lname" class="col-sm-1 control-label">สกุล</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control validate[required]" value="<?= $per_lname ?>"
+                        <input type="text" class="form-control" value="<?= $per_lname ?>"
+                               data-validation-engine="validate[required]"
                                data-errormessage-value-missing="กรุณากรอก สกุล"
                                name="input-lname" id="input-lname"/>
                     </div>
@@ -104,7 +116,8 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-idcard" class="col-sm-2 control-label">รหัสบัตร</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control validate[required,maxSize[13],minSize[13]]" 
+                        <input type="text" class="form-control" maxlength="13"
+                               data-validation-engine="validate[required,maxSize[13],minSize[13]]"
                                data-errormessage-value-missing="กรุณากรอก รหัสบัตร"
                                data-errormessage-range-underflow="กรุณากรอก รหัสบัตร 13 หลัก"
                                data-errormessage-range-overflow="กรุณากรอก รหัสบัตร 13 หลัก" value="<?= $per_idcard ?>"
@@ -112,7 +125,8 @@ if (!empty($_GET['id'])) {
                     </div>
                     <label for="input-address" class="col-sm-1 control-label">ที่อยู่</label>
                     <div class="col-sm-5">
-                        <textarea class="form-control validate[required]" 
+                        <textarea class="form-control" 
+                                  data-validation-engine="validate[required]"
                                   data-errormessage-value-missing="กรุณากรอก ที่อยู่"
                                   name="input-address" id="input-address"><?= $per_address ?></textarea>
                     </div>
@@ -131,7 +145,8 @@ if (!empty($_GET['id'])) {
                     </div>       
                     <label for="input-serial_number" class="col-sm-2 control-label">เลขเครื่อง</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control validate[required]" 
+                        <input type="text" class="form-control" value="<?=$serial_number?>"
+                               data-validation-engine="validate[required]"
                                data-errormessage-value-missing="กรุณากรอก เลขเครื่อง"
                                name="input-serial_number" id="input-serial_number"/>
                     </div>  
@@ -139,8 +154,9 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-problem" class="col-sm-2 control-label">อาการเสีย</label>
                     <div class="col-sm-10">
-                        <select class="form-control validate[required]" id="combo-problem"   multiple                             
-                                data-errormessage-value-missing="กรุณากรอก อาการเสีย"
+                        <select class="form-control" id="combo-problem"   multiple  
+                                data-validation-engine="validate[required]"
+                                data-errormessage-value-missing="กรุณาเลือก อาการเสีย"
                                 name="input-equipment" id="input-equipment">                              
                                     <?php
                                     $sql_problem = "SELECT * FROM problem";
@@ -150,20 +166,23 @@ if (!empty($_GET['id'])) {
                                 <option value="<?= $data_problem['prob_id'] ?>"><?= $data_problem['prob_name'] ?></option>
                             <?php endwhile; ?>
                         </select>
-                        <input type="hidden" name="hidden-problem" id="hidden-problem"/>
+                        <input type="hidden" name="hidden-problem" id="hidden-problem"
+                               class="form-control validate[required]"                           
+                               data-errormessage-value-missing="กรุณากรอก อาการเสีย"/>
                     </div>                    
                 </div>
                 <div class="form-group">
                     <label for="input-problem_other" class="col-sm-2 control-label">อาการเสีย หรือ ปัญหา อื่นๆ</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" 
-                                  name="input-problem_other" id="input-problem_other"></textarea>
+                                  name="input-problem_other" id="input-problem_other"><?=$problem_other?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="combo-equipment" class="col-sm-2 control-label">การซ่อม-อะไหล่ที่ต้องเปลี่ยน</label>
                     <div class="col-sm-10">
-                        <select class="form-control validate[required]" id="combo-equipment" multiple                             
+                        <select class="form-control" id="combo-equipment" multiple                             
+                                data-validation-engine="validate[required]"
                                 data-errormessage-value-missing="กรุณาเลือก อะไหล่ที่ต้องเปลี่ยน"
                                 name="input-equipment" id="input-equipment">  
                                     <?php
@@ -189,11 +208,27 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-equipment" class="col-sm-2 control-label">วิธีการชำระเงิน</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control validate[required]" 
-                                  data-errormessage-value-missing="กรุณากรอก อะไหล่ที่ต้องเปลี่ยน"
-                                  name="input-equipment" id="input-equipment"></textarea>
+                        <textarea class="form-control" 
+                                  data-validation-engine="validate[required]"
+                                  data-errormessage-value-missing="กรุณากรอก วิธีการชำระเงิน"
+                                  name="input-payment" id="input-payment"><?=$payment?></textarea>
                     </div>                    
                 </div>
+                <div class="form-group">
+                    <label for="input-createdate" class="col-sm-2 control-label">วันที่มารับเครื่อง</label>
+                    <div class="col-sm-3 input-append date">
+                        <div class="input-group">
+                            <input type="text" class="form-control validate[required]"
+                                   data-errormessage-value-missing="กรุณากรอก วันที่ซ่อม" value="<?= format_date('d-m-Y', $repair_createdate) ?>"
+                                   data-date-format="dd/mm/yyyy" name="input-getdate" id="datetext_2" readonly/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="datebtn_2">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-success">
@@ -213,14 +248,33 @@ if (!empty($_GET['id'])) {
         $('select[name=combo-brand]').on('change', function() {
             find_model(this);
         });
+        var selectProblem = $('#combo-problem').select2();
+        var selectEquipment = $('#combo-equipment').select2();
+        // ################ load default data ######
+        var edit_id = $('#input-id').val();
+        console.log('edit_id ::=='+edit_id);
+        if (edit_id != '') {
+            $.post('../method/repair.php?method=get_default_select2',
+                    {
+                        id: edit_id,
+                    }, function(defaultData) {
+                selectProblem.select2("data", defaultData.problems);
+                $('#hidden-problem').val(selectProblem.select2('val'));
+                
+                selectEquipment.select2("data", defaultData.equipments);
+                $('#hidden-equipment').val(selectEquipment.select2('val'));                
+            }, 'json');
+        }
+        // ################ load default data ######
+
         var valid = $('#frm-repair').validationEngine('attach', {
             promptPosition: "centerLeft:50",
             scroll: false,
             onValidationComplete: function(form, status) {
                 console.log('status :' + status);
                 if (status) {
-                    post_form('frm-repair', '../method/repair.php?method=create');
-                }
+                    post_form('frm-repair', '../method/repair.php?method=assign_repairman');
+                }                
             }
         });
         valid.css({
@@ -229,7 +283,7 @@ if (!empty($_GET['id'])) {
         });
 
         // ###########select 2 #####################
-        var selectProblem = $('#combo-problem').select2({
+        selectProblem.select2({
             placeholder: "-- คลิกเลือก อาการเสีย --",
             allowClear: true,
             closeOnSelect: true,
@@ -246,7 +300,7 @@ if (!empty($_GET['id'])) {
         });
 
 
-        var selectEquipment = $('#combo-equipment').select2({
+        selectEquipment.select2({
             placeholder: "-- คลิกเลือก อะไหล่ที่ต้องเปลี่ยน --",
             allowClear: true,
             closeOnSelect: true,
@@ -263,6 +317,23 @@ if (!empty($_GET['id'])) {
         });
         // ###########select 2 #####################
     });
-
+    function validateProblem(field, rules, i, options) {
+        /*console.log('field ::==' + field);
+         console.log('\n rules ::==' + rules);
+         console.log('\n i ::==' + i);
+         console.log('\n options ::==' + options);*/
+        var problem = $('#hidden-problem').val();
+        //console.log('\n problem ::=='+problem);
+        if (problem == '') {
+            //return 'กรุณาเลือก อาการเสีย';
+            return options.allrules.validate2fields.alertText;
+        }
+    }
+    function validateEquipment() {
+        var problem = $('#hidden-equipment').val();
+        if (problem == '') {
+            return 'กรุณาเลือก อะไหล่ที่ต้องเปลี่ยน';
+        }
+    }
 </script>
 
