@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2015 at 04:47 PM
+-- Generation Time: Mar 08, 2015 at 04:01 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `color` (
 --
 
 INSERT INTO `color` (`col_id`, `col_name`, `col_createdate`, `col_createby`, `col_updatedate`, `col_updateby`) VALUES
-(3, 'แดง red', '2015-01-27 13:03:19', 1, '2015-01-27 13:03:49', 1),
+(3, 'แดง red', '2015-01-27 13:03:19', 1, '2015-02-16 14:45:04', 1),
 (4, 'น้ำเงิน', '2015-01-27 13:03:41', 1, '2015-01-27 13:03:41', 1),
 (5, 'ดำ black', '2015-01-27 13:04:01', 1, '2015-01-27 13:04:01', 1),
 (6, 'ทอง', '2015-01-27 13:04:11', 1, '2015-01-27 13:04:11', 1),
@@ -219,32 +219,39 @@ INSERT INTO `model` (`mod_id`, `mod_nameth`, `mod_nameeng`, `bra_id`, `mod_creat
 --
 
 CREATE TABLE IF NOT EXISTS `person` (
-  `per_id` int(11) NOT NULL AUTO_INCREMENT,
-  `per_fname` varchar(100) NOT NULL,
-  `per_lname` varchar(100) NOT NULL,
-  `per_username` varchar(100) NOT NULL,
-  `per_password` varchar(50) NOT NULL,
-  `per_idcard` varchar(13) NOT NULL,
-  `per_address` text NOT NULL,
-  `per_mobile` varchar(15) NOT NULL,
-  `per_email` varchar(100) NOT NULL,
-  `per_createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `per_createby` int(11) NOT NULL,
-  `per_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `per_updateby` int(11) NOT NULL,
-  `per_status` int(11) NOT NULL COMMENT '0 = รออนุมัติ 1 = admin 2=officer 3=onwer 4=repairman',
+  `per_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส',
+  `per_status` int(1) NOT NULL COMMENT '1= employee,2=repairer,3=customer',
+  `per_fname` varchar(100) NOT NULL COMMENT 'ชื่อ',
+  `per_lname` varchar(100) NOT NULL COMMENT 'สกุล',
+  `per_username` varchar(100) NOT NULL COMMENT 'username',
+  `per_password` varchar(50) NOT NULL COMMENT 'password',
+  `per_idcard` varchar(13) NOT NULL COMMENT 'รหัสบัตร',
+  `per_address` text NOT NULL COMMENT 'ที่อยู่',
+  `per_mobile` varchar(15) NOT NULL COMMENT 'มือถือ',
+  `per_email` varchar(100) NOT NULL COMMENT 'อีเมลล์',
+  `per_createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'วันที่สร้าง',
+  `per_createby` int(11) NOT NULL COMMENT 'ผู้สร้าง',
+  `per_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'วันที่แก้ไข',
+  `per_updateby` int(11) NOT NULL COMMENT 'ผู้แก้ไข',
   PRIMARY KEY (`per_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `person`
 --
 
-INSERT INTO `person` (`per_id`, `per_fname`, `per_lname`, `per_username`, `per_password`, `per_idcard`, `per_address`, `per_mobile`, `per_email`, `per_createdate`, `per_createby`, `per_updatedate`, `per_updateby`, `per_status`) VALUES
-(1, 'admin', 'admin', 'admin', '1234', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 04:28:46', 1, '2015-01-18 15:38:28', 1, 1),
-(3, 'user', 'user', 'user', '1234', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 15:33:48', 1, '2015-01-18 15:33:48', 1, 1),
-(4, 'user', 'user', 'user', '1234567', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 15:37:17', 1, '2015-01-18 15:37:17', 1, 2),
-(5, 'test', 'test', 'test', '1234', '2222222222211', 'test', '1234567890', 'poon_mp@hotmail.com', '2015-01-27 12:37:24', 0, '2015-01-27 12:37:24', 0, 0);
+INSERT INTO `person` (`per_id`, `per_status`, `per_fname`, `per_lname`, `per_username`, `per_password`, `per_idcard`, `per_address`, `per_mobile`, `per_email`, `per_createdate`, `per_createby`, `per_updatedate`, `per_updateby`) VALUES
+(1, 1, 'user', 'user', 'admin', '1234', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 04:28:46', 1, '2015-03-01 13:32:39', 1),
+(3, 1, 'user', 'user', 'user', '1234', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 15:33:48', 1, '2015-03-01 13:32:39', 1),
+(4, 2, 'user', 'user', 'user', '1234567', '1234567890123', 'ระยอง', '1234567890', 'user@gmail.com', '2015-01-18 15:37:17', 1, '2015-03-01 13:32:39', 1),
+(5, 0, 'test', 'test', 'test', '1234', '2222222222211', 'test', '1234567890', 'poon_mp@hotmail.com', '2015-01-27 12:37:24', 0, '2015-01-27 12:37:24', 0),
+(6, 1, 'พูลสวัสดิ์', 'อภิญ', '', '', '1111111111111', '189', '', '', '2015-02-28 16:12:34', 1, '2015-02-28 17:50:30', 1),
+(7, 2, 'ยินดี', 'ยินดี', 'repairman', '1234', '1111111111111', 'ยินดี', '', '', '2015-02-28 17:46:55', 1, '2015-02-28 17:50:22', 1),
+(8, 3, '1219800120630', '1219800120650', 'customer', '1234', '1219800120630', '1219800120650', '', '', '2015-03-01 03:09:45', 1, '2015-03-01 03:49:15', 1),
+(9, 1, '1219800120659', '1219800120650', '', '', '1219800120658', '1219800120650', '', '', '2015-03-01 03:41:40', 1, '2015-03-01 03:41:40', 1),
+(10, 1, 'sdsdsdsd', '1219800120625', '', '', '1219800120625', '1219800120625', '', '', '2015-03-01 03:51:03', 1, '2015-03-01 03:51:03', 1),
+(11, 1, '1219800120632', '1219800120650', '', '', '1219800120632', '1219800120650', '', '', '2015-03-01 03:51:58', 1, '2015-03-01 03:51:58', 1),
+(12, 1, 'user 21', 'user', '', '', '1234567890121', 'ระยอง', '', '', '2015-03-01 03:55:15', 1, '2015-03-01 03:55:15', 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +277,6 @@ CREATE TABLE IF NOT EXISTS `problem` (
 INSERT INTO `problem` (`prob_id`, `prob_name`, `prob_desc`, `prob_createdate`, `prob_createby`, `prob_updatedate`, `prob_updateby`) VALUES
 (1, 'เครื่องเสีย', 'เครื่องเสีย', '2015-01-18 16:01:23', 1, '2015-01-18 16:02:49', 1),
 (2, 'จอฟ้า', 'จอฟ้า', '2015-01-28 14:41:33', 1, '2015-01-28 14:41:33', 1),
-(3, 'บูดเครื่องไม่ได้', 'บูดเครื่องไม่ได้', '2015-01-29 06:44:03', 1, '2015-01-29 06:44:03', 1),
 (4, 'ไม่มีเสียง', 'ไม่มีเสียง', '2015-01-29 14:03:30', 1, '2015-01-29 14:03:30', 1),
 (5, 'จอภาพแตก', 'จอภาพแตก', '2015-01-29 14:03:50', 1, '2015-01-29 14:03:50', 1);
 
@@ -288,47 +294,38 @@ CREATE TABLE IF NOT EXISTS `repair` (
   `per_id` int(11) NOT NULL COMMENT 'รหัสลุกค้า',
   `bra_id` int(11) NOT NULL,
   `mod_id` int(11) NOT NULL,
+  `rep_serial_number` varchar(100) NOT NULL COMMENT 'เลขเครื่อง',
+  `rep_equipment` varchar(255) NOT NULL COMMENT 'รายการอุปกรณ์ที่จะซ่อม',
+  `rep_problem` varchar(255) NOT NULL COMMENT 'รายการปัญหา',
   `rep_problem_other` text NOT NULL,
+  `rep_payment` varchar(255) NOT NULL COMMENT 'วิธีการชำระเงิน',
+  `rep_repairers` int(11) DEFAULT NULL COMMENT 'รหัสพนักงานซ่อม',
+  `rep_expect_startdate` date DEFAULT NULL COMMENT 'วันที่คาดหวังเริ่มซ่อม',
+  `rep_expect_enddate` date DEFAULT NULL COMMENT 'วันที่คาดหวัง ซ่อมเสร็จ',
+  `rep_estimate_price` int(11) DEFAULT NULL COMMENT 'ราคาที่ประเมิน',
+  `rep_actual_startdate` date DEFAULT NULL COMMENT 'วันเริ่มซ่อมจริง',
+  `rep_actual_enddate` date DEFAULT NULL COMMENT 'วันสิ้นสุดซ่อมจริง',
+  `rep_repair_remark` text COMMENT 'หมายเหตุ',
   `rep_createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rep_createby` int(11) NOT NULL,
   `rep_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rep_updateby` int(11) NOT NULL,
-  `rep_status` int(11) NOT NULL COMMENT 'สถานะ การซ่อม (0=รอประเมิน,1=ประเมินเสร็จ รอซ่อม,2=กำลังซ่อม,3=ซ่อมเสร็จ สำเร็จ,4 = ซ่อมไม่ได้ เกิดปัญหา)',
+  `rep_status` int(2) NOT NULL COMMENT ' ''0'' => ''รอมอบหมายช่าง'',         ''1'' => ''มอบหมายช่าง รอประเมินราคา'',         ''2'' => ''ประเมินราคา เสร็จสิ้น'',         ''3'' => ''ประเมินราคา ไม่ผ่าน (ไม่สามารถซ่อมได้)'',         ''4'' => ''อนุมัติการซ่อม'',         ''5'' => ''ไม่อนุมัติการซ่อม'',         ''6'' => ''กำลังซ่อม'',                 ''7'' => ''ซ่อมเสร็จ สำเร็จ'',         ''8'' => ''ซ่อมไม่ได้ เกิดปัญหา'',         ''9'' => ''รับเครื่องเสร็จสิ้น ปิดการซ่อม'',',
   PRIMARY KEY (`rep_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `repair`
 --
 
-INSERT INTO `repair` (`rep_id`, `rep_code`, `rep_repair_createdate`, `rep_repair_getdate`, `per_id`, `bra_id`, `mod_id`, `rep_problem_other`, `rep_createdate`, `rep_createby`, `rep_updatedate`, `rep_updateby`, `rep_status`) VALUES
-(1, 'RP000000000001', '2015-01-01', '2015-01-29', 3, 1, 1, '', '2015-01-29 14:13:53', 1, '2015-01-29 14:13:53', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `repair_equipment`
---
-
-CREATE TABLE IF NOT EXISTS `repair_equipment` (
-  `repequ_id` int(11) NOT NULL AUTO_INCREMENT,
-  `rep_id` int(11) NOT NULL COMMENT 'รหัสใบซ่อม',
-  `equ_id` int(11) NOT NULL COMMENT 'รหัสอุปกรณ์ซ่อม',
-  PRIMARY KEY (`repequ_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `repair_problem`
---
-
-CREATE TABLE IF NOT EXISTS `repair_problem` (
-  `repprob_id` int(11) NOT NULL AUTO_INCREMENT,
-  `rep_id` int(11) NOT NULL COMMENT 'รหัสใบซ่อม',
-  `prob_id` int(11) NOT NULL COMMENT 'รหัสปัญหา',
-  PRIMARY KEY (`repprob_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+INSERT INTO `repair` (`rep_id`, `rep_code`, `rep_repair_createdate`, `rep_repair_getdate`, `per_id`, `bra_id`, `mod_id`, `rep_serial_number`, `rep_equipment`, `rep_problem`, `rep_problem_other`, `rep_payment`, `rep_repairers`, `rep_expect_startdate`, `rep_expect_enddate`, `rep_estimate_price`, `rep_actual_startdate`, `rep_actual_enddate`, `rep_repair_remark`, `rep_createdate`, `rep_createby`, `rep_updatedate`, `rep_updateby`, `rep_status`) VALUES
+(1, 'RP000000000001', '2015-03-01', '2015-03-01', 1, 4, 3, '1234567890123', '3,4,7,8', '1,2,4,5', '', '555555', 6, '2015-03-25', '2015-03-31', 99999999, '0000-00-00', '0000-00-00', 'test', '2015-01-29 14:13:53', 1, '2015-03-07 16:14:14', 1, 3),
+(2, 'RP000000000001', '2015-03-01', '2015-03-01', 12, 4, 3, '1219800120650', '', '1,4', '', '1219800120632', 12, '2015-03-04', '2015-03-04', 90000, '0000-00-00', '0000-00-00', '11111111', '2015-02-28 15:17:07', 1, '2015-03-07 16:13:58', 1, 2),
+(4, 'RP00000003', '2015-03-01', '2015-03-01', 6, 4, 3, '', '3,4', '2', '', '', 8, '0000-00-00', '0000-00-00', 0, '0000-00-00', '0000-00-00', '', '2015-02-28 16:12:34', 1, '2015-02-28 17:50:30', 1, 4),
+(5, 'RP00000005', '2015-03-01', '2015-03-01', 7, 4, 3, '', '3,7', '1', 'ยินดี', 'ยินดี', 7, '2015-03-25', '2015-03-31', 0, '0000-00-00', '0000-00-00', '', '2015-02-28 17:46:55', 1, '2015-02-28 17:50:22', 1, 1),
+(6, 'RP00000006', '2015-03-01', '2015-03-01', 8, 12, 5, '', '4', '1', '1219800120650', '1219800120650', 0, '0000-00-00', '0000-00-00', 0, '0000-00-00', '0000-00-00', '', '2015-03-01 03:09:45', 1, '2015-03-01 03:09:45', 1, 0),
+(7, 'RP00000007', '2015-03-01', '2015-03-01', 11, 12, 5, '1219800120650', '3', '1', '1219800120650', '1219800120650', 0, '0000-00-00', '0000-00-00', 0, '0000-00-00', '0000-00-00', '', '2015-03-01 03:13:58', 1, '2015-03-01 03:51:58', 1, 0),
+(8, 'RP00000008', '2015-03-01', '2015-03-01', 10, 5, 6, '1219800120650', '7', '1', '1219800120650', '1219800120650', 6, '2015-03-07', '2015-03-27', 0, '0000-00-00', '0000-00-00', '', '2015-03-01 03:27:34', 1, '2015-03-01 03:51:03', 1, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
