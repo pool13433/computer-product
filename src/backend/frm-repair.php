@@ -50,6 +50,36 @@ if (empty($code)) {
     $result = mysql_fetch_assoc($query_auto);
     $code = generateNextNumber($result['rep_id'], 8, 'RP');
 }
+// ############## check permission disabled #############
+if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจะสามารถแก้ไขได้ทั้งหน้า
+    ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('.form-control,.btn').attr('disabled', true);
+             $('input:not(:disabled):not([readonly])').each(function() {
+                $(this).attr('disabled',true);
+            });
+        });
+    </script>
+    <?php
+} else if ($_SESSION['person']['per_status'] == REPAIRNAME) { // ช่างซ่อมเห็นได้บางส่วน
+    ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('.form-control,.btn').attr('disabled', true);
+            $('input:not(:disabled):not([readonly])').each(function() {
+                $(this).foo();
+            });
+        });
+    </script>
+    <?php
+} else if ($_SESSION['person']['per_status'] == CUSTOMER) { // ลูกค้า
+    ?>
+    <script type="text/javascript">
+    </script>
+    <?php
+}
+// ############## check permission disabled #############
 ?>
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
@@ -145,7 +175,7 @@ if (empty($code)) {
                     </div>       
                     <label for="input-serial_number" class="col-sm-2 control-label">เลขเครื่อง</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" value="<?=$serial_number?>"
+                        <input type="text" class="form-control" value="<?= $serial_number ?>"
                                data-validation-engine="validate[required]"
                                data-errormessage-value-missing="กรุณากรอก เลขเครื่อง"
                                name="input-serial_number" id="input-serial_number"/>
@@ -175,7 +205,7 @@ if (empty($code)) {
                     <label for="input-problem_other" class="col-sm-2 control-label">อาการเสีย หรือ ปัญหา อื่นๆ</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" 
-                                  name="input-problem_other" id="input-problem_other"><?=$problem_other?></textarea>
+                                  name="input-problem_other" id="input-problem_other"><?= $problem_other ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -199,7 +229,7 @@ if (empty($code)) {
                 <div class="form-group">
                     <label for="input-fname" class="col-sm-2 control-label">สถานะ</label>
                     <div class="col-sm-8">
-                        <label class="label label-info">รอซ่อม</label>
+                        <label class="label label-<?= getDataList($status, List_RepairStatusBG())?>"><?= getDataList($status, List_RepairStatus())?></label>
                     </div>                    
                 </div>
                 <div class="form-group">
@@ -211,7 +241,7 @@ if (empty($code)) {
                         <textarea class="form-control" 
                                   data-validation-engine="validate[required]"
                                   data-errormessage-value-missing="กรุณากรอก วิธีการชำระเงิน"
-                                  name="input-payment" id="input-payment"><?=$payment?></textarea>
+                                  name="input-payment" id="input-payment"><?= $payment ?></textarea>
                     </div>                    
                 </div>
                 <div class="form-group">
@@ -252,7 +282,7 @@ if (empty($code)) {
         var selectEquipment = $('#combo-equipment').select2();
         // ################ load default data ######
         var edit_id = $('#input-id').val();
-        console.log('edit_id ::=='+edit_id);
+        console.log('edit_id ::==' + edit_id);
         if (edit_id != '') {
             $.post('../method/repair.php?method=get_default_select2',
                     {
@@ -260,9 +290,9 @@ if (empty($code)) {
                     }, function(defaultData) {
                 selectProblem.select2("data", defaultData.problems);
                 $('#hidden-problem').val(selectProblem.select2('val'));
-                
+
                 selectEquipment.select2("data", defaultData.equipments);
-                $('#hidden-equipment').val(selectEquipment.select2('val'));                
+                $('#hidden-equipment').val(selectEquipment.select2('val'));
             }, 'json');
         }
         // ################ load default data ######
@@ -274,7 +304,7 @@ if (empty($code)) {
                 console.log('status :' + status);
                 if (status) {
                     post_form('frm-repair', '../method/repair.php?method=assign_repairman');
-                }                
+                }
             }
         });
         valid.css({

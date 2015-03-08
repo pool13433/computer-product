@@ -6,6 +6,20 @@ define('EMPLOYEE', 1);
 define('REPAIRNAME', 2);
 define('CUSTOMER', 3);
 
+define('WAIT_ESTIMATE', 1);
+
+// '2' => 'ประเมินราคา เสร็จสิ้น',
+// '3' => 'ประเมินราคา ไม่ผ่าน (ไม่สามารถซ่อมได้)',
+define('ESTIMATE_SUCCESS', 2);
+define('ESTIMATE_FAIL', 3);
+
+//'4' => 'อนุมัติการซ่อม',
+//'5' => 'ไม่อนุมัติการซ่อม',
+define('APPROVE', 4);
+define('NON_APPROVE', 5);
+
+define('PROCESSING', 6);
+
 function msgBox($type, $msg) {
     return '<div class="alert alert-' . $type . '" role="alert">' . $msg . '</div>';
 }
@@ -28,21 +42,22 @@ function List_RepairStatus() {
         '3' => 'ประเมินราคา ไม่ผ่าน (ไม่สามารถซ่อมได้)',
         '4' => 'อนุมัติการซ่อม',
         '5' => 'ไม่อนุมัติการซ่อม',
-        '6' => 'กำลังซ่อม',        
+        '6' => 'กำลังซ่อม',
         '7' => 'ซ่อมเสร็จ สำเร็จ',
         '8' => 'ซ่อมไม่ได้ เกิดปัญหา',
         '9' => 'รับเครื่องเสร็จสิ้น ปิดการซ่อม',
     );
 }
+
 function List_RepairStatusBG() {
     return array(
         '0' => 'warning',
         '1' => 'success',
-        '2' => 'success',
+        '2' => 'info',
         '3' => 'danger',
         '4' => 'success',
         '5' => 'danger',
-        '6' => 'info',        
+        '6' => 'info',
         '7' => 'success',
         '8' => 'danger',
         '9' => 'success',
@@ -122,7 +137,7 @@ function Get_Day($params) {
 }
 
 function generateNextNumber($value, $digit, $prefix) {
-    return $prefix . str_pad((intval($value)+1), $digit, "0", STR_PAD_LEFT);
+    return $prefix . str_pad((intval($value) + 1), $digit, "0", STR_PAD_LEFT);
 }
 
 function change_dateDMY_TO_YMD($beforDate) {
@@ -140,9 +155,13 @@ function change_dateYMD_TO_DMY($beforDate) {
 }
 
 function format_date($format, $date) {
-    $date_format = new DateTime($date);
-    $new_date = $date_format->format($format);
-    return $new_date;
+    if ($date == '0000-00-00') {
+        return date('d/m/Y');
+    } else {
+        $date_format = new DateTime($date);
+        $new_date = $date_format->format($format);
+        return $new_date;
+    }
 }
 
 function array_post_to_string($array) {

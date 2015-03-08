@@ -34,8 +34,7 @@
             promptPosition: "centerRight",
             scroll: false,
             onValidationComplete: function(form, status) {
-                //console.log('status : '+status);
-                if (status == true) {
+                if (status) {
                     login();
                 }
             }
