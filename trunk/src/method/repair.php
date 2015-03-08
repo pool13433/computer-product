@@ -1,8 +1,10 @@
 <?php
+
 session_start();
 include '../config/connect.php';
 include '../config/webapp.php';
 $person = $_SESSION['person'];
+$ses_id = $person['per_id'];
 $msg = '';
 $title = 'error';
 switch ($_GET['method']) {
@@ -170,7 +172,7 @@ switch ($_GET['method']) {
         }
         break;
     case 'assign_repairman': // มอบหมายงาน
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $rep_id = $_POST['input-id'];
             $repairman = $_POST['combo-repairman'];
             $expect_startdate = change_dateDMY_TO_YMD($_POST['input-expect_startdate']);
@@ -181,12 +183,57 @@ switch ($_GET['method']) {
             $sql .= " rep_expect_enddate = '$expect_enddate',";
             $sql .= " rep_status = 1"; // 1 = มอบหมายเสร็จสิ้น
             $sql .= " WHERE rep_id = $rep_id";
-            $query = mysql_query($sql) or die(mysql_error().'sql ::=='.$sql);
+            $query = mysql_query($sql) or die(mysql_error() . 'sql ::==' . $sql);
             if ($query) {
                 echo returnJson('success', 'information', 'มอบหมายงานซ่อมให้ช่าง เรียบร้อย', 'index.php?page=list-repairman');
             } else {
                 echo returnJson('error', 'error', 'มอบหมายงาน ไม่ได้เกิดปัญหา', '');
             }
+        }
+        break;
+    case 'estimate':
+        if (!empty($_POST)) {
+            $repair_id = (empty($_POST['input-id']) ? '' : $_POST['input-id']);
+            $equipment = (empty($_POST['hidden-equipment']) ? '' : $_POST['hidden-equipment']);
+            $price = $_POST['input-price'];
+            $remark = $_POST['input-remark'];
+            $status = (empty($_POST['rep_status']) ? '2' : $_POST['rep_status']);
+            $sql = " UPDATE repair SET ";
+            $sql .= " rep_estimate_price = $price,";
+            $sql .= " rep_equipment = '$equipment',";
+            $sql .= " rep_repair_remark = '$remark',";
+            $sql .= " rep_status = $status,";
+            $sql .= " rep_updatedate = NOW(),";
+            $sql .= " rep_updateby = $ses_id";
+            $sql .= " WHERE rep_id = $repair_id";
+            $query = mysql_query($sql) or die(mysql_error() . 'sql ::==' . $sql);
+            if ($query) {
+                echo returnJson('success', 'information', 'ประเมินราคาการซ่อม เรียบร้อย', 'index.php?page=list-repairman');
+            } else {
+                echo returnJson('error', 'error', 'ประเมินราคาการซ่อม ไม่ได้เกิดปัญหา', '');
+            }
+        }
+        break;
+    case 'approve':
+        $msg = '';
+        $rep_id = $_POST['rep_id'];
+        $status = $_POST['status'];
+        $sql = " UPDATE repair SET ";
+        $sql .= " rep_status = $status";
+        $sql .= " WHERE rep_id = $rep_id";
+
+        //'4' => 'อนุมัติการซ่อม',
+        //'5' => 'ไม่อนุมัติการซ่อม',
+        if ($status == 4) {
+            $msg = 'อนุมัติการซ่อม';
+        } else {
+            $msg = 'ไม่อนุมัติการซ่อม';
+        }
+        $query = mysql_query($sql) or die(mysql_error() . 'sql ::==' . $sql);
+        if ($query) {
+            echo returnJson('success', 'information', $msg . ' เรียบร้อย', 'index.php?page=list-repairman');
+        } else {
+            echo returnJson('error', 'error', $msg . ' ไม่ได้เกิดปัญหา', '');
         }
         break;
     default:

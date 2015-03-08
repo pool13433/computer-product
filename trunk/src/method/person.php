@@ -22,15 +22,15 @@ switch ($_GET['method']) {
             if ($row > 0): // เจอผู้ใช้งาน
                 $person = mysql_fetch_assoc($query);
                 $_SESSION['person'] = $person;
-                switch ($person['per_status']) {
-                    case 0:
-                        $url = 'frontend/index.php?page=home';
-                        break;
+                switch ($person['per_status']) {                   
                     case 1:
                         $url = 'backend/index.php?page=home';
                         break;
                     case 2:
-                        $url = 'frontend/index.php?page=home';
+                        $url = 'backend/index.php?page=home';
+                        break;
+                     case 3:
+                        $url = 'backend/index.php?page=home';
                         break;
                     default:
                         break;

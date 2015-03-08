@@ -189,6 +189,27 @@ function login() {
                 showJAlert(data.title, data.msg, 'error');
                 //showNotification('danger', data.title, data.msg, 3);
             }
+        },
+        /*error: function(xhr, error) {
+         
+         showJAlert('error', 'xhr ::==' + xhr + '\n error ::==' + error, 'error');
+         }, */
+        error: function(jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                showJAlert('error', 'Not connect.\n Verify Network.', 'error');
+            } else if (jqXHR.status == 404) {
+                showJAlert('error', 'Requested page not found. [404]', 'error');
+            } else if (jqXHR.status == 500) {
+                showJAlert('error', 'Internal Server Error [500].', 'error');
+            } else if (exception === 'parsererror') {
+                showJAlert('error', 'Requested JSON parse failed.', 'error');
+            } else if (exception === 'timeout') {
+                showJAlert('error', 'Time out error.', 'error');
+            } else if (exception === 'abort') {
+                showJAlert('error', 'Ajax request aborted.', 'error');
+            } else {
+                showJAlert('error', 'Uncaught Error.\n' + jqXHR.responseText, 'error');
+            }
         }
     });
 }
@@ -287,7 +308,11 @@ function find_model(element) {
         });
     }, 'json');
 }
-
+function setAccordion(element) { // element = this
+    var tagA = $(element).parents('div.panel-collapse');
+    var tagId = $(tagA).attr('id');
+    setCookie('accordion', tagId, 365);
+}
 
 
 
