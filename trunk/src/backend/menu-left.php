@@ -131,6 +131,11 @@
                                 <a href="index.php?page=report-2" onclick="setAccordion(this)"><i class="glyphicon glyphicon-calendar"></i> รายงาน 2</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <a href="index.php?page=report-3" onclick="setAccordion(this)"><i class="glyphicon glyphicon-calendar"></i> รายงาน 3</a>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -156,7 +161,7 @@
                             <td>
                                 <a href="index.php?page=report-2" onclick="setAccordion(this)"><i class="glyphicon glyphicon-calendar"></i> รายงาน 2</a>
                             </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </div>
             </div>

@@ -191,3 +191,33 @@ function remove_string_is_null($post) {
     }
     return $resutl;
 }
+
+function sort_array() {
+    $array = array('apple', 'orange', 'pear', 'banana', 'apple', 'pear', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi');
+    echo '<br/>เรียง key น้อยไปมาก<br/>sort ::==';
+    sort($array);
+    print_r(array_count_values($array));
+    echo '<br/>เรียง key มากไปน้อย<br/>rsort ::==';
+    rsort($array);
+    print_r(array_count_values($array));
+    echo '<br/>asort ::==';
+    asort($array);
+    print_r(array_count_values($array));
+    echo '<br/>เรียง key น้อยไปมาก<br/>ksort ::==';
+    ksort($array);
+    print_r(array_count_values($array));
+    echo '<br/>เรียง key มากไปน้อย<br/>arsort ::==';
+    arsort($array);
+    print_r(array_count_values($array));
+    echo '<br/>เรียง ค่า มากไปน้อย<br/>krsort ::==';
+    krsort($array);
+    print_r(array_count_values($array));
+}
+
+function sort_arrayObject() {
+    ArrayObject::ksort();// - Sort the entries by key
+    ArrayObject::natsort();// - Sort entries using a "natural order" algorithm
+    ArrayObject::natcasesort();// - Sort an array using a case insensitive "natural order" algorithm
+    ArrayObject::uasort();// - Sort the entries with a user-defined comparison function and maintain key association
+    ArrayObject::uksort();// - Sort the entries by keys using a user-defined comparison function
+}
