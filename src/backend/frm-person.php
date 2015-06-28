@@ -1,6 +1,7 @@
 <?php
 include '../config/connect.php';
 $id = '';
+$prefix = '';
 $fname = '';
 $lname = '';
 $username = '';
@@ -20,6 +21,7 @@ if (!empty($_GET['id'])) {
     $query = mysql_query($sql) or die(mysql_error());
     $data = mysql_fetch_assoc($query);
     $id = $data['per_id'];
+    $prefix = $data['pre_id'];
     $fname = $data['per_fname'];
     $lname = $data['per_lname'];
     $username = $data['per_username'];
@@ -69,22 +71,25 @@ if (!empty($_GET['id'])) {
                         <input type="password" class="form-control validate[required,equals[input-password]]" 
                                data-errormessage-value-missing="กรุณากรอก รหัสผ่านอีกครั้ง"
                                data-errormessage-pattern-mismatch ="กรุณากรอก รหัสผ่านให้ตรงกัน"
-                               name="input-password_re" id="input-password_re" value="<?= $password_re ?>"/>
+                               name="input-password_re" id="input-password_re" value="<?= $password ?>"/>
                     </div>
                 </div>   
                 <hr/>
                 <div class="form-group">
-                    <label for="input-fname" class="col-sm-2 control-label">ชื่อ</label>
-                    <div class="col-sm-4">
+                    <label for="input-fname" class="col-sm-2 control-label">นำหน้าชื่อ</label>
+                    <div class="col-sm-2">
                         <input type="hidden" name="input-id" value="<?= $id ?>"/>
+                        <?php include '../config/combo-prefix.php'; ?>
+                    </div>
+                    <label for="input-fname" class="col-sm-2 control-label">ชื่อ-สกุล</label>
+                    <div class="col-sm-3">
                         <input type="text" class="form-control validate[required]" 
-                               data-errormessage-value-missing="กรุณากรอก ชื่อไทย"
+                               data-errormessage-value-missing="กรุณากรอก ชื่อ" placeholder="ชื่อ"
                                name="input-fname" id="input-fname" value="<?= $fname ?>"/>
                     </div>
-                    <label for="input-lname" class="col-sm-2 control-label">นามสกุล</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control validate[required]" 
-                               data-errormessage-value-missing="กรุณากรอก ชื่อไทย"
+                               data-errormessage-value-missing="กรุณากรอก นามสกุล" placeholder="นามสกุล"
                                name="input-lname" id="input-lname" value="<?= $lname ?>"/>
                     </div>
                 </div>         
@@ -92,8 +97,8 @@ if (!empty($_GET['id'])) {
                     <label for="input-idcard" class="col-sm-2 control-label">รหัสบัตรประชาชน</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control validate[required,minSize[13],maxSize[13],custom[integer]]" 
-                               data-errormessage-value-missing="กรุณากรอก รหัสบัตรประชาชน"
-                               data-errormessage-range-overflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร"
+                               data-errormessage-value-missing="กรุณากรอก รหัสบัตรประชาชน" placeholder="รหัสบัตรประชาชน"
+                               data-errormessage-range-overflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร" maxlength="13"
                                data-errormessage-range-underflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร"
                                data-errormessage-custom-error ="กรุณากรอก รหัสบัตร เป็นตัวเลขเท่านั้น"
                                name="input-idcard" id="input-idcard" value="<?= $idcard ?>"/>
@@ -102,24 +107,24 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-address" class="col-sm-2 control-label">ที่อยู่</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control validate[required]" 
+                        <textarea class="form-control validate[required]"  placeholder="ที่อยู่"
                                   data-errormessage-value-missing="กรุณากรอก ที่อยู่"
-                                  name="input-address" id="input-address" ><?=$address?></textarea>
+                                  name="input-address" id="input-address" ><?= $address ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="input-mobile" class="col-sm-2 control-label">โทรศัพท์</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control validate[required,custom[phone],minSize[10]]" 
-                               data-errormessage-value-missing="กรุณากรอก โทรศัพท์"
-                               data-errormessage-range-underflow="กรุณากรอก โทรศัพท์ 10 ให้ครบ"
+                               data-errormessage-value-missing="กรุณากรอก โทรศัพท์" placeholder="โทรศัพท์"
+                               data-errormessage-range-underflow="กรุณากรอก โทรศัพท์ 10 ให้ครบ" maxlength="10"
                                data-errormessage-custom-error ="กรุณากรอก โทรศัพท์ เป็นตัวเลขเท่านั้น"
                                name="input-mobile" id="input-mobile" value="<?= $mobile ?>"/>
                     </div>
                     <label for="input-email" class="col-sm-2 control-label">อีเมลล์</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control validate[required,custom[email]]" 
-                               data-errormessage-value-missing="กรุณากรอก อีเมลล์"
+                               data-errormessage-value-missing="กรุณากรอก อีเมลล์" placeholder="อีเมลล์"
                                data-errormessage-custom-error ="กรุณากรอก อีเมลล์ ให้ถูกต้อง"
                                name="input-email" id="input-email" value="<?= $email ?>"/>
                     </div>
@@ -127,7 +132,7 @@ if (!empty($_GET['id'])) {
                 <div class="form-group">
                     <label for="input-address" class="col-sm-2 control-label">สถานะ</label>
                     <div class="col-sm-3">
-                        <?php include '../config/combo-person.php';?>
+                        <?php include '../config/combo-person.php'; ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -145,11 +150,11 @@ if (!empty($_GET['id'])) {
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var valid = $('#frm-person').validationEngine('attach', {
             promptPosition: "centerLeft",
             scroll: false,
-            onValidationComplete: function(form, status) {                
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     post_form('frm-person', '../method/person.php?method=create');
                 }

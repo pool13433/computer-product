@@ -26,7 +26,8 @@ switch ($_GET['method']) {
             $serial_number = $_POST['input-serial_number'];
             $problem = $_POST['hidden-problem'];
             $equipment = $_POST['hidden-equipment'];
-            $payment = $_POST['input-payment'];
+            $accessory = $_POST['hidden-accessory'];
+            $payment = $_POST['input-payment'];            
             //exit('stop');
             //
             // ################## check person id ##########
@@ -78,14 +79,14 @@ switch ($_GET['method']) {
                 $sql = " INSERT INTO `repair`(";
                 $sql .= " `rep_code`, `rep_repair_createdate`, ";
                 $sql .= " `rep_repair_getdate`, `per_id`, `bra_id`, rep_serial_number,";
-                $sql .= " `mod_id`,rep_problem,rep_equipment, `rep_problem_other`, rep_payment,`rep_createdate`, ";
+                $sql .= " `mod_id`,rep_problem,rep_equipment, `rep_problem_other`,rep_accessory, rep_payment,`rep_createdate`, ";
                 $sql .= " `rep_createby`, `rep_updatedate`, `rep_updateby`, ";
                 //$sql .= " `rep_repairers`, `rep_expect_startdate`, `rep_expect_enddate`,";
                 //$sql .= " `rep_estimate_price`, `rep_actual_startdate`, `rep_actual_enddate`, `rep_repair_remark`,";
                 $sql .= " `rep_status`) VALUES (";
                 $sql .= " '$code','$repair_createdate',";
                 $sql .= " '$repair_getdate',$insert_id,$brand,'$serial_number',";
-                $sql .= " $model,'$problem','$equipment','$problem_other','$payment',NOW(),";
+                $sql .= " $model,'$problem','$equipment','$problem_other','$accessory','$payment',NOW(),";
                 $sql .= " $ses_id,NOW(),$ses_id,0"; // 0 = รอมอบหมายช่าง
                 $sql .= " )";
 
@@ -100,6 +101,7 @@ switch ($_GET['method']) {
                 $sql .= " rep_serial_number = '$serial_number',";
                 $sql .= " rep_problem = '$problem',rep_equipment = '$equipment',";
                 $sql .= " `mod_id`=$model,`rep_problem_other`='$problem_other',";
+                $sql .= " rep_accessory = '$accessory',";
                 $sql .= " rep_payment = '$payment',";
                 $sql .= " `rep_updatedate`=NOW(),`rep_updateby`=$ses_id";
                 $sql .= "  WHERE `rep_id`=$rep_id";
@@ -150,6 +152,7 @@ switch ($_GET['method']) {
                     }
                 }
                 // ############# problem ###############
+                // 
                 // ############# equipment ###############
                 $equipments = array();
                 if (!empty($dataRepair['rep_equipment'])) {
@@ -163,11 +166,28 @@ switch ($_GET['method']) {
                         );
                     }
                 }
+
+                // ############# equipment ###############
+                // ############# accessory ###############
+                $accessory = array();
+                if (!empty($dataRepair['rep_accessory'])) {
+                    $sql_accessory = " SELECT * FROM accessory";
+                    $sql_accessory .= " WHERE acc_id in ( " . $dataRepair ['rep_accessory'] . ")";
+                    $query_accessory = mysql_query($sql_accessory) or die(mysql_error() . 'sql ::==' . $sql_accessory);
+                    while ($objaccessory = mysql_fetch_array($query_accessory)) {
+                        $accessory[] = array(
+                            'id' => $objaccessory['acc_id'],
+                            'text' => $objaccessory['acc_name'],
+                        );
+                    }
+                }
             }
             // ############# equipment ###############
+
             echo json_encode(array(
                 'problems' => $problems,
                 'equipments' => $equipments,
+                'accessory' => $accessory,
             ));
         }
         break;

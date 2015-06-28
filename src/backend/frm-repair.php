@@ -57,7 +57,7 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
         $(document).ready(function() {
             //$('.form-control,.btn').attr('disabled', true);
              $('input:not(:disabled):not([readonly])').each(function() {
-                $(this).attr('disabled',true);
+                $(this).attr('visible',true);
             });
         });
     </script>
@@ -67,9 +67,9 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
     <script type="text/javascript">
         $(document).ready(function() {
             //$('.form-control,.btn').attr('disabled', true);
-            $('input:not(:disabled):not([readonly])').each(function() {
-                $(this).foo();
-            });
+//            $('input:not(:visible):not([readonly])').each(function() {
+//                $(this).foo();
+//            });
         });
     </script>
     <?php
@@ -227,6 +227,24 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
                     </div>                    
                 </div>
                 <div class="form-group">
+                    <label for="combo-accessory" class="col-sm-2 control-label">อุปกรณ์ที่ติดเครื่องมา</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="combo-accessory" multiple                             
+                                data-validation-engine="validate[required]"
+                                data-errormessage-value-missing="กรุณาเลือก อุปกรณ์เสริมที่ติดเครื่อง"
+                                name="input-accessory" id="input-accessory">  
+                                    <?php
+                                    $sql_accessory = "SELECT * FROM accessory";
+                                    $query_accessory = mysql_query($sql_accessory) or die(mysql_error());
+                                    while ($data_accessory = mysql_fetch_array($query_accessory)):
+                                        ?>
+                                <option value="<?= $data_accessory['acc_id'] ?>"><?= $data_accessory['acc_name'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                        <input type="hidden" name="hidden-accessory" id="hidden-accessory"/>
+                    </div>                    
+                </div>
+                <div class="form-group">
                     <label for="input-fname" class="col-sm-2 control-label">สถานะ</label>
                     <div class="col-sm-8">
                         <label class="label label-<?= getDataList($status, List_RepairStatusBG())?>"><?= getDataList($status, List_RepairStatus())?></label>
@@ -280,6 +298,7 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
         });
         var selectProblem = $('#combo-problem').select2();
         var selectEquipment = $('#combo-equipment').select2();
+        var selectAccessory = $('#combo-accessory').select2();
         // ################ load default data ######
         var edit_id = $('#input-id').val();
         console.log('edit_id ::==' + edit_id);
@@ -293,6 +312,9 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
 
                 selectEquipment.select2("data", defaultData.equipments);
                 $('#hidden-equipment').val(selectEquipment.select2('val'));
+                
+                selectAccessory.select2("data", defaultData.accessory);
+                $('#hidden-accessory').val(selectAccessory.select2('val'));
             }, 'json');
         }
         // ################ load default data ######
@@ -303,7 +325,7 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
             onValidationComplete: function(form, status) {
                 console.log('status :' + status);
                 if (status) {
-                    post_form('frm-repair', '../method/repair.php?method=assign_repairman');
+                    post_form('frm-repair', '../method/repair.php?method=create');
                 }
             }
         });
@@ -344,6 +366,22 @@ if ($_SESSION['person']['per_status'] == EMPLOYEE) { // พนักงานจ
         }).on("change", function(e) {
             //alert('value ' + select2.select2('val'));
             $('#hidden-equipment').val(e.val);
+        });
+        
+        selectAccessory.select2({
+            placeholder: "-- คลิกเลือก อุปกรณ์เสริมที่ติดเครื่อง --",
+            allowClear: true,
+            closeOnSelect: true,
+            //tags: true,            
+            width: '100%',
+        }).on("select2-open", function() {
+            $('#hidden-accessory').val(selectEquipment.select2('val'));
+        }).on("select2-selecting", function(e) {
+            //alert('value ' + select2.select2('val'));
+            $('#hidden-accessory').val(e.val);
+        }).on("change", function(e) {
+            //alert('value ' + select2.select2('val'));
+            $('#hidden-accessory').val(e.val);
         });
         // ###########select 2 #####################
     });

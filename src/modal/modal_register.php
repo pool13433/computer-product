@@ -20,13 +20,13 @@
                     <div class="form-group">
                         <label for="input-password" class="col-sm-2 control-label">รหัสผ่าน</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control validate[required]" 
+                            <input type="password" class="form-control validate[required]" 
                                    data-errormessage-value-missing="กรุณากรอก รหัสผ่าน"
                                    name="input-password_1" id="input-password_1"/>
                         </div>
                         <label for="input-password_2" class="col-sm-3 control-label">ยืนยัน รหัสผ่านอีกครั้ง</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control validate[required,equals[input-password_1]]" 
+                            <input type="password" class="form-control validate[required,equals[input-password_1]]" 
                                    data-errormessage-value-missing="กรุณากรอก รหัสผ่านอีกครั้ง"
                                    data-errormessage-pattern-mismatch ="กรุณากรอก รหัสผ่านให้ตรงกัน"
                                    name="input-password_2" id="input-password_2"/>
@@ -34,25 +34,39 @@
                     </div>   
                     <hr/>
                     <div class="form-group">
-                        <label for="input-fname" class="col-sm-2 control-label">ชื่อ</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control validate[required]" 
-                                   data-errormessage-value-missing="กรุณากรอก ชื่อไทย"
-                                   name="input-fname" id="input-fname"/>
+                        <label for="input-fname" class="col-sm-2 control-label">นำหน้าชื่อ</label>
+                        <div class="col-sm-2">
+                            <input type="hidden" name="input-id" value=""/>
+                            <?php
+                            require_once './config/connect.php';
+                            $sql_prefix = " SELECT * FROM prefix ORDER BY pre_name";
+                            $query_prefix = mysql_query($sql_prefix) or die(mysql_error());
+                            ?>
+                            <select class="form-control validate[required]" name="combo-prefix" data-errormessage-value-missing="กรุณาเลือก คำนำหน้าชื่อ">
+                                <option value="">-- เลือก --</option>
+                                <?php while ($data_prefix = mysql_fetch_array($query_prefix)): ?>
+                                    <option value="<?= $data_prefix['pre_id'] ?>"><?= $data_prefix['pre_name'] ?></option>
+                                <?php endwhile; ?>
+                            </select>                            
                         </div>
-                        <label for="input-lname" class="col-sm-2 control-label">นามสกุล</label>
-                        <div class="col-sm-4">
+                        <label for="input-fname" class="col-sm-2 control-label">ชื่อ-สกุล</label>
+                        <div class="col-sm-3">
                             <input type="text" class="form-control validate[required]" 
-                                   data-errormessage-value-missing="กรุณากรอก ชื่อไทย"
-                                   name="input-lname" id="input-lname"/>
+                                   data-errormessage-value-missing="กรุณากรอก ชื่อ" placeholder="ชื่อ"
+                                   name="input-fname" id="input-fname" value=""/>
                         </div>
-                    </div>         
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control validate[required]" 
+                                   data-errormessage-value-missing="กรุณากรอก นามสกุล" placeholder="นามสกุล"
+                                   name="input-lname" id="input-lname" value=""/>
+                        </div>
+                    </div>            
                     <div class="form-group">
                         <label for="input-idcard" class="col-sm-2 control-label">รหัสบัตรประชาชน</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control validate[required,minSize[13],maxSize[13],custom[integer]]" 
                                    data-errormessage-value-missing="กรุณากรอก รหัสบัตรประชาชน"
-                                   data-errormessage-range-overflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร"
+                                   data-errormessage-range-overflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร" maxlength="13"
                                    data-errormessage-range-underflow="กรุณากรอก รหัสบัตร 13 ตัวอักษร"
                                    data-errormessage-custom-error ="กรุณากรอก รหัสบัตร เป็นตัวเลขเท่านั้น"
                                    name="input-idcard" id="input-idcard"/>
@@ -70,7 +84,7 @@
                         <label for="input-mobile" class="col-sm-2 control-label">โทรศัพท์</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control validate[required,custom[phone],minSize[10]]" 
-                                   data-errormessage-value-missing="กรุณากรอก โทรศัพท์"
+                                   data-errormessage-value-missing="กรุณากรอก โทรศัพท์" maxlength="10"
                                    data-errormessage-range-underflow="กรุณากรอก โทรศัพท์ 10 ให้ครบ"
                                    data-errormessage-custom-error ="กรุณากรอก โทรศัพท์ เป็นตัวเลขเท่านั้น"
                                    name="input-mobile" id="input-mobile"/>
@@ -97,11 +111,11 @@
     </form>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var valid = $('#frm-register').validationEngine('attach', {
             promptPosition: "centerRight:-20",
             scroll: false,
-            onValidationComplete: function(form, status) {                
+            onValidationComplete: function (form, status) {
                 if (status) {
                     post_form('frm-register', 'method/person.php?method=register');
                 }

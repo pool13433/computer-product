@@ -70,7 +70,7 @@
         }
         ?>
         <?php include './menu-top.php'; ?>
-        <div class="container">            
+        <div class="container-fluid">            
             <div class="row row-offcanvas row-offcanvas-right">
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas sidebar-offcanvas" id="sidebar">
                     <?php include './menu-left.php'; ?>

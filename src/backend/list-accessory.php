@@ -40,7 +40,7 @@
                             <td><?= format_date('d/m/Y', $data['acc_updatedate']) ?></td>
                             <td><?= $data['per_fname'] ?></td>
                             <td>
-                                <a href="index.php?page=frm-accessory&id=<?= $data['acc_id'] ?>" class="btn btn-warning">
+                                <a href="index.php?page=frm-accessory&id=<?= $data['acc_id'] ?>" class="btn btn-primary">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </a>
                             </td>

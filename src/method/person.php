@@ -22,14 +22,14 @@ switch ($_GET['method']) {
             if ($row > 0): // เจอผู้ใช้งาน
                 $person = mysql_fetch_assoc($query);
                 $_SESSION['person'] = $person;
-                switch ($person['per_status']) {                   
+                switch ($person['per_status']) {
                     case 1:
                         $url = 'backend/index.php?page=home';
                         break;
                     case 2:
                         $url = 'backend/index.php?page=home';
                         break;
-                     case 3:
+                    case 3:
                         $url = 'backend/index.php?page=home';
                         break;
                     default:
@@ -90,6 +90,7 @@ switch ($_GET['method']) {
         if (!empty($_POST)):
             // ########### variable ##########
             $per_id = $_POST['input-id'];
+            $per_prefix = $_POST['combo-prefix'];
             $per_fname = $_POST['input-fname'];
             $per_lname = $_POST['input-lname'];
             $per_username = $_POST['input-username'];
@@ -102,13 +103,13 @@ switch ($_GET['method']) {
             // ########### variable ##########
             if (empty($_POST['input-id'])): // insert
                 $sql = " INSERT INTO `person`(";
-                $sql .= "  `per_fname`,";
+                $sql .= "  pre_id,`per_fname`,";
                 $sql .= " `per_lname`, `per_username`, `per_password`,";
                 $sql .= " `per_idcard`, `per_address`, `per_mobile`, ";
                 $sql .= " `per_email`, `per_createdate`,";
                 $sql .= " `per_createby`, `per_updatedate`,";
                 $sql .= " `per_updateby`, `per_status`) VALUES (";
-                $sql .= " '$per_fname',";
+                $sql .= " $per_prefix,'$per_fname',";
                 $sql .= " '$per_lname','$per_username','$per_password',";
                 $sql .= " '$per_idcard','$per_address','$per_mobile',";
                 $sql .= " '$per_email',NOW(),";
@@ -118,6 +119,7 @@ switch ($_GET['method']) {
                 $msg = 'เพิ่มผู้ใช้งาน สำเร็จ';
             else: // update
                 $sql = " UPDATE `person` SET";
+                $sql .= " pre_id = $per_prefix,";
                 $sql .= " `per_fname`='$per_fname',";
                 $sql .= " `per_lname`='$per_lname',";
                 $sql .= " `per_username`='$per_username',";
@@ -129,7 +131,7 @@ switch ($_GET['method']) {
                 $sql .= " `per_updatedate`=NOW(),";
                 $sql .= " `per_updateby`=$ses_id,";
                 $sql .= " `per_status`=$per_status";
-                $sql .= " WHERE `per_id`=$ses_id";
+                $sql .= " WHERE `per_id`=$per_id";
                 $msg = 'แก้ไขผู้ใช้งาน สำเร็จ';
             endif;
 

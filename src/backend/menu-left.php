@@ -33,6 +33,12 @@
                         <tr>
                             <td>
                                 <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="index.php?page=list-prefix" onclick="setAccordion(this)"><i class="glyphicon glyphicon-user"></i> จัดการทำนำหน้าชื่อ</a>
+                            </td>
+                        </tr>     
+                        <tr>
+                            <td>
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
                                 <a href="index.php?page=list-person" onclick="setAccordion(this)"><i class="glyphicon glyphicon-user"></i> รายการ ผู้ใช้งาน</a>
                             </td>
                         </tr>                    
@@ -63,6 +69,11 @@
                         </tr>
                         <tr>
                             <td>
+                                <a href="index.php?page=list-problem" onclick="setAccordion(this)"><i class="glyphicon glyphicon-bold"></i> รายการ อาการเสีย</a>
+                            </td>
+                        </tr>
+                        <!--<tr>
+                            <td>
                                 <a href="index.php?page=list-equipment" onclick="setAccordion(this)"><i class="glyphicon glyphicon-folder-close"></i> รายการ อุปกรณ์</a>
                             </td>
                         </tr>
@@ -74,6 +85,11 @@
                         <tr>
                             <td>
                                 <a href="index.php?page=list-color" onclick="setAccordion(this)"><i class="glyphicon glyphicon-unchecked"></i> รายการ สี</a>
+                            </td>
+                        </tr>-->
+                        <tr>
+                            <td>
+                                <a href="index.php?page=list-accessory" onclick="setAccordion(this)"><i class="glyphicon glyphicon-list-alt"></i> รายการ อุปกรณ์ติดเครื่องมาด้วย</a>
                             </td>
                         </tr>
                     </table>
@@ -195,8 +211,8 @@
     <?php } ?>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#'+getCookie('accordion')).prop('class','panel-collapse collapse in');
+    $(document).ready(function () {
+        $('#' + getCookie('accordion')).prop('class', 'panel-collapse collapse in');
     });
 
 </script>
