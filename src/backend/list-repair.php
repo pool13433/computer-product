@@ -1,11 +1,11 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อมเข้า    
+            <i class="glyphicon glyphicon-list-alt"></i> หน้าจอรายการใบรับซ่อม    
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=frm-repair " class="btn btn-info">
-                <i class="glyphicon glyphicon-plus-sign"></i> สร้าง
+                <i class="glyphicon glyphicon-plus-sign"></i> สร้างใบรับซ่อม
             </a>
         </div>
     </div>
@@ -14,15 +14,15 @@
             <table class="table table-striped table-bordered dataTable">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width: 5%">#</th>
                         <th>ชื่อรหัสใบซ่อม</th>
                         <th>ชื่อลูกค้า</th>
                         <th>วันรับซ่อม</th>
                         <th>วันรับของซ่อม</th>
                         <!--<th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>-->
-                        <th>สถานะ</th>
-                        <th>#</th>
+                        <th style="width: 8%">สถานะ</th>
+                        <th style="width: 8%">#</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -5,14 +5,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
-        <link rel="stylesheet" href="../../lib/bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.min.css"/>        
+
+
+        <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.5/css/bootstrap-theme.min.css"/>
 
         <!-- jquery -->
         <script type="text/javascript" src="../../js/jquery.js"></script>
         <!-- jquery -->
 
         <!-- bootstrap-->
-        <script type="text/javascript" src="../../lib/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
         <!-- bootstrap-->
 
         <!-- datepicker-->
@@ -31,11 +34,10 @@
         <script type="text/javascript" src="../../lib/validationengine/js/languages/jquery.validationEngine-en.js"></script>
         <!-- validationEngine-->
 
-        <!-- dataatble -->
-        <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-table-master/docs/dist/bootstrap-table.min.css"/>
-        <script type="text/javascript" src="../../lib/bootstrap-table-master/docs/dist/bootstrap-table.min.js"></script>
-        <script type="text/javascript" src="../../lib/bootstrap-table-master/docs/dist/extensions/export/bootstrap-table-export.min.js"></script>
-        <!-- dataatble -->
+        <!-- DataTable Plugin-->
+        <link rel="stylesheet" type="text/css" href="../../lib/datatables/dataTables.css"/>
+        <script type="text/javascript" src="../../lib/datatables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../../lib/datatables/dataTables.bootstrap.js"></script>
 
         <!-- pnotify -->
         <!--<link rel="stylesheet" type="text/css" href="../../css/pnotify.custom.min.css">      
@@ -43,8 +45,8 @@
         <link rel="stylesheet" href="../../lib/jAlert-master/jAlert-v2-min.css"/>
         <script type="text/javascript" src="../../lib/jAlert-master/jAlert-v2-min.js"></script>
         <!-- pnotify -->
-        
-         <!-- datepicker-->
+
+        <!-- datepicker-->
         <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-datepicker/css/datepicker.css"/>
         <script type="text/javascript" src="../../lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <!-- datepicker-->
@@ -54,7 +56,7 @@
         <link rel="stylesheet" href="../../lib/select2-3.5.0/select2.css"/>
         <script src="../../lib/select2-3.5.0/select2.min.js" type="text/javascript"></script>
         <!-- select 2-->
-        
+
         <!-- tempate-->        
         <link rel="stylesheet" href="../../css/offcanvas.css"/>
         <script type="text/javascript" src="../../js/offcanvas.js"></script>
@@ -63,7 +65,7 @@
     </head>
     <body>
         <?php
-         include '../config/webapp.php';
+        include '../config/webapp.php';
         if (!isset($_SESSION)) {
             @ob_start();
             @session_start();

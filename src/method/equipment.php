@@ -25,8 +25,17 @@ switch ($_GET['method']) {
             $interface = remove_string_empty($_POST['input-interface']);
             $spinspeed = remove_string_empty($_POST['input-spinspeed']);
             $support = $_POST['hidden-support'];
+            
+            if (empty($_POST['input-id'])) { // สร้างไหม่ต้องตรวจสอบ ข้อมูลก่อนว่าเคยสร้างไปหรือยัง
+                $sql = " SELECT * FROM equipment WHERE equ_name = '$name'";
+                $query = mysql_query($sql) or die(mysql_error() . 'sql :' . $sql);
+                $row = mysql_num_rows($query);
+                if ($row > 0) {
+                    exit(returnJson('error', 'เกิดข้อผิดพลาด', 'ข้อมูลถูกใช้งาน ไม่สามารถสร้างใหม่ได้', ''));
+                }
+            }
 
-            if (empty($_POST['input-id'])) { // UPDATE 
+            if (empty($_POST['input-id'])) { // INSERT 
                 $sql = " INSERT INTO `equipment`(";
                 $sql .= " `equ_name`, `equ_desc`,";
                 $sql .= " `bra_id`, `col_id`, `mod_id`, `equtyp_id`,`equ_warranty`,";
@@ -43,7 +52,7 @@ switch ($_GET['method']) {
                 $sql .= " )";
                 $title = 'information';
                 $msg = 'เพิ่ม อุปกรณ์ ใหม่ สำเร็จ';
-            } else { // NEW                               
+            } else { // UPDATE                               
                 $sql = " UPDATE `equipment` SET ";
                 $sql .= " `equ_name`='$name',";
                 $sql .= " `equ_desc`='$desc',`bra_id`=$brand,";

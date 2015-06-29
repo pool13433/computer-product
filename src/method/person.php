@@ -61,6 +61,16 @@ switch ($_GET['method']) {
             $per_mobile = $_POST['input-mobile'];
             $per_email = $_POST['input-email'];
             // ########### variable ##########
+            
+            
+            // สร้างไหม่ต้องตรวจสอบ ข้อมูลก่อนว่าเคยสร้างไปหรือยัง
+            $sql = " SELECT * FROM person WHERE per_fname = '$per_fname' AND per_lname = '$per_lname'";
+            $query = mysql_query($sql) or die(mysql_error() . 'sql :' . $sql);
+            $row = mysql_num_rows($query);
+            if ($row > 0) {
+                exit(returnJson('error', 'เกิดข้อผิดพลาด', 'ข้อมูลถูกใช้งาน ไม่สามารถสร้างใหม่ได้', ''));
+            }
+
 
             $sql = " INSERT INTO `person`(";
             $sql .= "  `per_fname`,";
@@ -76,7 +86,7 @@ switch ($_GET['method']) {
             $sql .= " 0,NOW(),";
             $sql .= " 0,1";
             $sql .= " )";
-            $msg = 'ลงทะเบียนผู้ใช้งานใหม่ สำเร็จ กรุณา ล๊อกอินเข้าสู่ระบบ';
+            $msg = 'สมัครสมาชิกเรียบร้อย กรุณา ล๊อกอินเข้าสู่ระบบ';
 
             $query = mysql_query($sql) or die(mysql_error() . 'sql ::==' . $sql);
             if ($query):

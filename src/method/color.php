@@ -12,7 +12,18 @@ switch ($_GET['method']) {
             $per_id = $person['per_id'];
             $id = $_POST['input-id'];
             $name = $_POST['input-name'];
-            if (empty($_POST['input-id'])) { // UPDATE 
+            
+            
+             if (empty($_POST['input-id'])) { // สร้างไหม่ต้องตรวจสอบ ข้อมูลก่อนว่าเคยสร้างไปหรือยัง
+                $sql = " SELECT * FROM color WHERE col_name = '$name'";
+                $query = mysql_query($sql) or die(mysql_error() . 'sql :' . $sql);
+                $row = mysql_num_rows($query);
+                if ($row > 0) {
+                    exit(returnJson('error', 'เกิดข้อผิดพลาด', 'ข้อมูลถูกใช้งาน ไม่สามารถสร้างใหม่ได้', ''));
+                }
+            }
+            
+            if (empty($_POST['input-id'])) { // INSERT 
                 $sql = " INSERT INTO `color`(";
                 $sql .= " `col_name`,`col_createdate`, ";
                 $sql .= " `col_createby`, `col_updatedate`, `col_updateby`)";
@@ -22,7 +33,7 @@ switch ($_GET['method']) {
                 $sql .= " )";
                 $title = 'information';
                 $msg = 'เพิ่ม สี ใหม่ สำเร็จ';
-            } else { // NEW                               
+            } else { // UPDATE                               
                 $sql = " UPDATE `color` SET ";
                 $sql .= " `col_name`='$name',";
                 $sql .= " `col_updatedate`=NOW(),";

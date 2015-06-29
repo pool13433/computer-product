@@ -32,14 +32,12 @@
                     <table class="table">
                         <tr>
                             <td>
-                                <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                <a href="index.php?page=list-prefix" onclick="setAccordion(this)"><i class="glyphicon glyphicon-user"></i> จัดการทำนำหน้าชื่อ</a>
+                                <a href="index.php?page=list-prefix" onclick="setAccordion(this)"><i class="glyphicon glyphicon-briefcase"></i> คำนำหน้าชื่อ</a>
                             </td>
                         </tr>     
                         <tr>
                             <td>
-                                <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                <a href="index.php?page=list-person" onclick="setAccordion(this)"><i class="glyphicon glyphicon-user"></i> รายการ ผู้ใช้งาน</a>
+                                <a href="index.php?page=list-person" onclick="setAccordion(this)"><i class="glyphicon glyphicon-user"></i> จัดการผู้ใช้งานระบบ</a>
                             </td>
                         </tr>                    
                     </table>
@@ -59,17 +57,17 @@
                     <table class="table">
                         <tr>
                             <td>
-                                <a href="index.php?page=list-brand" onclick="setAccordion(this)"><i class="glyphicon glyphicon-th-large"></i> รายการ ยี้ห้อคอมพิวเตอร์</a>
+                                <a href="index.php?page=list-brand" onclick="setAccordion(this)"><i class="glyphicon glyphicon-th-large"></i> รายการยี่ห้อ</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="index.php?page=list-model" onclick="setAccordion(this)"><i class="glyphicon glyphicon-th"></i> รายการ รุ่นคอมพิวเตอร์</a>
+                                <a href="index.php?page=list-model" onclick="setAccordion(this)"><i class="glyphicon glyphicon-th"></i> รายการรุ่น</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="index.php?page=list-problem" onclick="setAccordion(this)"><i class="glyphicon glyphicon-bold"></i> รายการ อาการเสีย</a>
+                                <a href="index.php?page=list-problem" onclick="setAccordion(this)"><i class="glyphicon glyphicon-bold"></i> รายการอาการเสีย</a>
                             </td>
                         </tr>
                         <!--<tr>
@@ -109,12 +107,12 @@
                     <table class="table">
                         <tr>
                             <td>
-                                <a href="index.php?page=list-repair" onclick="setAccordion(this)"><i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อมเข้า</a>     
+                                <a href="index.php?page=list-repair" onclick="setAccordion(this)"><i class="glyphicon glyphicon-list-alt"></i> รายการใบรับซ่อม</a>     
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="index.php?page=list-repairman" onclick="setAccordion(this)"><i class="glyphicon glyphicon-wrench"></i> รายการ ใบซ่อมช่าง</a>        
+                                <a href="index.php?page=list-repairman" onclick="setAccordion(this)"><i class="glyphicon glyphicon-wrench"></i> รายการงานซ่อม</a>        
                             </td>
                         </tr>
                         <tr>

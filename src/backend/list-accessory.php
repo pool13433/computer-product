@@ -14,13 +14,13 @@
             <table class="table table-striped table-bordered dataTable">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width: 5%">#</th>
                         <th>ชื่อ</th>
                         <th>ชื่ออธิบาย</th>
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
-                        <th>แก้ไข</th>
-                        <th>ลบ</th>
+                        <th style="width: 8%">แก้ไข</th>
+                        <th style="width: 8%">ลบ</th>
                     </tr>
                 </thead>
                 <tbody>

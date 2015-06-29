@@ -1,7 +1,7 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-list-alt"></i> รายการ ใบซ่อมเข้า    
+            <i class="glyphicon glyphicon-list-alt"></i> หน้าจอรายการงานซ่อม   
         </h4>
     </div>
     <div class="panel-body">
@@ -46,18 +46,17 @@
                             <td><?= format_date('d/m/Y', $data['rep_expect_startdate']) ?></td>
                             <td><?= format_date('d/m/Y', $data['rep_expect_enddate']) ?></td>                                                        
                             <td>
-                                <span class="label label-<?= getDataList($data['rep_status'], List_RepairStatusBG()) ?>"><?= getDataList($data['rep_status'], List_RepairStatus()) ?></span>
+                                <h4><span class="label label-<?= getDataList($data['rep_status'], List_RepairStatusBG()) ?>"><?= getDataList($data['rep_status'], List_RepairStatus()) ?></span></h4>
                             </td>
-                            <td>                                
+                            <td>         
                                 <div class="btn-group-vertical" role="group" aria-label="...">
                                     <!-- Button trigger modal -->
-                                    <?php if ($_SESSION['person']['per_status'] == REPAIRNAME) { ?>
-                                        <?php if ($data['rep_status'] == WAIT_ESTIMATE) { ?>
-                                            <?= $data['rep_status'] ?>
+                                    <?php if ($_SESSION['person']['per_status'] == REPAIRNAME) { // ต้องเป็นช่างซ่อม ?>
+                                        <?php if ($data['rep_status'] == WAIT_ESTIMATE) { // สถานะซ่อม?>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-success" data-toggle="modal" 
                                                     data-target="#modal-estimate<?= $data['rep_id'] ?>" id="btnLoadModalEstimate<?= $data['rep_id'] ?>">
-                                                ประเมินการซ่อมเครื่อง
+                                                ประเมินการซ่อมเครื่อง/แจ้งอาการเสีย
                                             </button>
                                             <?php include '../modal/modal_estimate.php'; ?>
                                         <?php } ?>
@@ -71,7 +70,9 @@
                                                 ไม่อนุมัติ
                                             </button>
                                         <?php } ?>
-                                    <?php } ?>
+                                    <?php }else{ ?>
+                                            <h4><span class="label label-info">สำหรับช่าง/ลุกค้า</span></h4>
+                                    <?php }?>
                                 </div>                                
                             </td>
                         </tr>             

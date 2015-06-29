@@ -84,7 +84,7 @@ $perstatus = $data['per_status'];
                         <i class="glyphicon glyphicon-ok-circle"></i> บันทึก                        
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <i class="glyphicon glyphicon-remove-circle"></i> ปิด               
+                        <i class="glyphicon glyphicon-remove-circle"></i> ยกเลิก               
                     </button>                    
                 </div>
             </div>

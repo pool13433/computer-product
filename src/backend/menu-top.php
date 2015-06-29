@@ -37,7 +37,7 @@ endif;
                 </li>
                 <li>
                     <a href="#" id="btn-profile" data-toggle="modal" data-target="#modal-profile">
-                        <i class="glyphicon glyphicon-user"></i> ประวัติส่วนตัว
+                        <i class="glyphicon glyphicon-user"></i> แก้ไขข้อมูลส่วนตัว
                     </a>
                 </li>
                 <li><a href="#" onclick="logout()"><i class="glyphicon glyphicon-log-out"></i> ออกจากระบบ</a></li>

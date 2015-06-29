@@ -1,11 +1,11 @@
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-unchecked"></i> รายการ คำนำหน้าชื่อ
+            <i class="glyphicon glyphicon-unchecked"></i>  หน้าจอจัดการคำนำหน้าชื่อ
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=frm-prefix" class="btn btn-info">
-                <i class="glyphicon glyphicon-plus-sign"></i> สร้าง
+                <i class="glyphicon glyphicon-plus-sign"></i> เพิ่มคำนำหน้าชื่อ
             </a>
         </div>
     </div>
@@ -14,12 +14,12 @@
             <table class="table table-striped table-bordered dataTable">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width: 5%">#</th>
                         <th>ชื่อ</th>
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
-                        <th>แก้ไข</th>
-                        <th>ลบ</th>
+                        <th style="width: 8%">แก้ไข</th>
+                        <th style="width: 8%">ลบ</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -22,7 +22,7 @@
             </a>
             ||
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-register">
-                <i class="glyphicon glyphicon-registration-mark"></i> ลงทะเบียนใหม่
+                <i class="glyphicon glyphicon-registration-mark"></i> สมัครสมาชิก
             </button>
         </div>
     </form>

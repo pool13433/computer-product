@@ -15,7 +15,7 @@ if (!empty($_GET['id'])) {
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-th-large"></i> ยี้ห้อเครื่องคอมพิวเตอร์
+            <i class="glyphicon glyphicon-th-large"></i> หน้าจอเพิ่มยี่ห้อ
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=list-brand" class="btn btn-warning">
@@ -49,7 +49,7 @@ if (!empty($_GET['id'])) {
                             <i class="glyphicon glyphicon-saved"></i> บันทึก
                         </button>
                         <a href="index.php?page=list-brand" class="btn btn-warning">
-                            <i class="glyphicon glyphicon-arrow-left"></i> ย้อนกลับ
+                            <i class="glyphicon glyphicon-arrow-left"></i> ยกเลิก
                         </a>
                     </div>
                 </div>

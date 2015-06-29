@@ -13,6 +13,17 @@ switch ($_GET['method']) {
             $id = $_POST['input-id'];
             $nameth = $_POST['input-nameth'];
             $nameeng = $_POST['input-nameeng'];
+            
+             if (empty($_POST['input-id'])) { // สร้างไหม่ต้องตรวจสอบ ข้อมูลก่อนว่าเคยสร้างไปหรือยัง
+                $sql = " SELECT * FROM brand WHERE bra_nameth = '$nameth' AND bra_nameeng = '$nameeng'";
+                $query = mysql_query($sql) or die(mysql_error() . 'sql :' . $sql);
+                $row = mysql_num_rows($query);
+                if ($row > 0) {
+                    exit(returnJson('error', 'เกิดข้อผิดพลาด', 'ข้อมูลถูกใช้งาน ไม่สามารถสร้างใหม่ได้', ''));
+                }
+            }
+            
+            
             if (empty($_POST['input-id'])) { // UPDATE 
                 $sql = " INSERT INTO `brand`(";
                 $sql .= " `bra_nameth`, `bra_nameeng`, `bra_createdate`, ";

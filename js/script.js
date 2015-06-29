@@ -3,28 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function() {
+var DATATABLE_LANGUAGE = {
+    "lengthMenu": "เลือกแสดง _MENU_ แถวต่อหน้า",
+    "info": "กำลังแสดงข้อมูล หน้า <label class='label label-info'>_PAGE_</label> จากทั้งหมด <label class='label label-info'>_PAGES_</label> หน้า",
+    "infoEmpty": "-- แสดง 0 รายการ --",
+    "infoFiltered": "(กรองจาก _MAX_ แถวทั้งหมด)",
+    "emptyTable": "ไม่มีข้อมูลในตาราง",
+    "infoPostFix": "",
+    "infoThousands": ".",
+    "loadingRecords": "กำลังโหลด ...",
+    "processing": "กำลังประมวลผล...",
+    "search": "ค้นหา...",
+    "paginate": {
+        "first": "หน้าแรก",
+        "previous": "ก่อนหน้า",
+        "next": "ต่อไป",
+        "last": "หน้าสุดท้าย"
+    },
+    "aria": {
+        "sortAscending": ": เปิดใช้งานในการจัดเรียงจากน้อยไปมากคอลัมน์",
+        "sortDescending": ": เปิดใช้งานจะเรียงลำดับจากมากไปน้อยคอลัมน์"
+    }
+};
+var DATEPICKER_LOCAL = {
+    applyLabel: 'เลือก',
+    cancelLabel: 'ยกเลิก',
+    fromLabel: 'จาก',
+    toLabel: 'ถึง',
+    customRangeLabel: 'Custom',
+    daysOfWeek: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+    monthNames: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
+    firstDay: 1
+};
+
+$(document).ready(function () {
     // http://wenzhixin.net.cn/p/bootstrap-table/docs/index.html
-    $('.dataTable').bootstrapTable({
-        /*method: 'get',
-         url: 'data2.json',
-         cache: false,
-         height: 400,*/
-        striped: true,
-        pagination: true,
-        pageSize: 10,
-        pageList: [10, 25, 50, 100, 200],
-        search: true,
-        showColumns: true,
-        showRefresh: true,
-        minimumCountColumns: 2,
-        //clickToSelect: true,
-        // extension export 
-        /*showExport : true, 
-         exportTypes : ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],
-         showFilter : true,
-         flat : true,*/
+    /*
+     * DataTable Plugin
+     */
+    $('.dataTable').dataTable({
+        "dom": "<'row'<'col-xs-6'l><'col-xs-6'f>r><'row'<'col-xs-12'P>>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+        "language": DATATABLE_LANGUAGE,
     });
+    $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'ค้นหาข้อมูล...');
+    $('.dataTables_length select').addClass('form-control');
+    
+     /*
+     * DataTable Plugin
+     */
+    
+    
     // ################### date properties ###########
     var objToday = new Date(),
             weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -52,20 +80,20 @@ $(document).ready(function() {
     var datepicke_1 = default_date1.datepicker("setDate", current);
 
 
-    datepicke_1.on('changeDate', function(ev) {
+    datepicke_1.on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
     datepicke_1.off('focus');
-    $('#datebtn_1').click(function() {
+    $('#datebtn_1').click(function () {
         datepicke_1.datepicker('show');
     });
 
     var datepicker_2 = $('#datetext_2').datepicker("setDate", current);
-    datepicker_2.on('changeDate', function(ev) {
+    datepicker_2.on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
     datepicker_2.off('focus');
-    $('#datebtn_2').click(function() {
+    $('#datebtn_2').click(function () {
         datepicker_2.datepicker('show');
     });
     // ########### datepicker ##########
@@ -146,12 +174,12 @@ function showNotification(nType, nTitle, nText, nDelay) {
     new PNotify(opts);
 }
 function redirectDelay(url, timer) {
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = url; //will redirect to your blog page (an ex: blog.html)
     }, (timer * 1000)); //will call the function after 2 secs.
 }
 function reloadDelay(timer) {
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.reload();//will redirect to your blog page (an ex: blog.html)
     }, (timer * 1000)); //will call the function after 2 secs.
 }
@@ -176,7 +204,7 @@ function login() {
         },
         type: 'post',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             if (data.status == 'success') {
                 var cookie = $('#cookie').val();
                 setCookie('username', username, 365);
@@ -194,7 +222,7 @@ function login() {
          
          showJAlert('error', 'xhr ::==' + xhr + '\n error ::==' + error, 'error');
          }, */
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             if (jqXHR.status === 0) {
                 showJAlert('error', 'Not connect.\n Verify Network.', 'error');
             } else if (jqXHR.status == 404) {
@@ -216,7 +244,7 @@ function login() {
 function logout() {
     var conf = confirm('ยืนยันการออกจากระบบ ใช่ [OK] || ไม่ใช่ [Cancle]');
     if (conf) {
-        $.post('../method/person.php?method=logout', {}, function(data) {
+        $.post('../method/person.php?method=logout', {}, function (data) {
             if (data.status == 'success') {
                 redirectDelay('../index.php', 1);
             }
@@ -260,13 +288,13 @@ function post_form(formid, url) {
         data: $('#' + formid).serialize(),
         type: 'post',
         dataType: 'json',
-        success: function(data, textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR) {
             showJAlert(data.title, data.msg, data.status)
             if (data.status == 'success') {
                 redirectDelay(data.url, 1);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log('jqXHR : ' + jqXHR + ' \ntextStatus : ' + textStatus + ' \nerrorThrown : ' + errorThrown);
         }
     });
@@ -279,7 +307,7 @@ function delete_data(id, url) {
             data: {id: id},
             type: 'post',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 showJAlert(data.title, data.msg, data.status);
                 if (data.status == 'success') {
                     reloadDelay(1);
@@ -300,10 +328,10 @@ function showJAlert(title, msg, theme) {
 }
 function find_model(element) {
     var brand_id = element.value;
-    $.post('../method/model.php?method=find_model', {brand: brand_id}, function(data) {
+    $.post('../method/model.php?method=find_model', {brand: brand_id}, function (data) {
         var model = $('select[name=combo-model]');
         model.children().remove();
-        $.each(data, function(index, value) {
+        $.each(data, function (index, value) {
             model.append('<option value=' + value.mod_id + '>' + value.mod_nameth + '</option>');
         });
     }, 'json');

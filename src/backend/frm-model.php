@@ -17,7 +17,7 @@ if (!empty($_GET['id'])) {
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-th-large"></i> รุ่นคอมพิวเตอร์
+            <i class="glyphicon glyphicon-th-large"></i> หน้าจอรุ่น
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=list-model" class="btn btn-warning">

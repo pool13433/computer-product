@@ -6,7 +6,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">
-                        <i class="glyphicon glyphicon-user"></i>ลงทะเบียนเข้าใช้งานระบบ</h4>
+                        <i class="glyphicon glyphicon-user"></i>หน้าจอสมัครสมาชิก</h4>
                 </div>
                 <div class="modal-body">                
                     <div class="form-group">
@@ -103,7 +103,7 @@
                         <i class="glyphicon glyphicon-ok-circle"></i> ลงทะเบียน                        
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <i class="glyphicon glyphicon-remove-circle"></i> ปิด                   
+                        <i class="glyphicon glyphicon-remove-circle"></i> ยกเลิก                   
                     </button>                    
                 </div>
             </div>

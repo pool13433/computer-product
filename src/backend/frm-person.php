@@ -40,7 +40,7 @@ if (!empty($_GET['id'])) {
 <div class="panel panel-success">
     <div class="panel-heading clearfix">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">
-            <i class="glyphicon glyphicon-user"></i> ผู้ใช้งานในระบบ
+            <i class="glyphicon glyphicon-user"></i> หน้าจอเพิ่มผู้ใช้งานระบบ
         </h4>
         <div class="btn-group pull-right">
             <a href="index.php?page=list-person" class="btn btn-warning">
@@ -141,7 +141,7 @@ if (!empty($_GET['id'])) {
                             <i class="glyphicon glyphicon-saved"></i> บันทึก
                         </button>
                         <a href="index.php?page=list-person" class="btn btn-warning">
-                            <i class="glyphicon glyphicon-arrow-left"></i> ย้อนกลับ
+                            <i class="glyphicon glyphicon-arrow-left"></i> ยกเลิก
                         </a>
                     </div>
                 </div>
