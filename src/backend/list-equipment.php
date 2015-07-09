@@ -20,7 +20,7 @@
                         <th>วันที่แก้ไข</th>
                         <th>ผู้แก้ไข</th>
                         <th style="width: 8%">แก้ไข</th>
-                        <thstyle="width: 8%">ลบ</th>
+                        <th style="width: 8%">ลบ</th>
                     </tr>
                 </thead>
                 <tbody>
