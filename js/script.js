@@ -76,7 +76,8 @@ $(document).ready(function () {
     } else {
         $.fn.datepicker.defaults.format = "dd-mm-yyyy";
     }
-    var current = new Date().toLocaleFormat('DD-MM-YYYY');
+    //var current = new Date().toLocaleFormat('DD-MM-YYYY');
+    var current = moment().format("DD-MM-YYYY");
     var datepicke_1 = default_date1.datepicker("setDate", current);
 
 

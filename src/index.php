@@ -10,6 +10,9 @@
         <!-- jquery -->
         <script type="text/javascript" src="../js/jquery.js"></script>
         <!-- jquery -->
+        
+         <!-- Moment Calendar-->
+        <script type="text/javascript" src="../js/moment.min.js"></script>
 
         <!-- bootstrap-->
         <script type="text/javascript" src="../lib/bootstrap-table-master/docs/assets/bootstrap/js/bootstrap.min.js"></script>

@@ -19,6 +19,9 @@ if (empty($_SESSION)) {
         <!-- jquery -->
         <script type="text/javascript" src="../../js/jquery.js"></script>
         <!-- jquery -->
+        
+        <!-- Moment Calendar-->
+        <script type="text/javascript" src="../../js/moment.min.js"></script>
 
         <!-- bootstrap-->
         <script type="text/javascript" src="../../lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
