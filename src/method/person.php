@@ -23,13 +23,13 @@ switch ($_GET['method']) {
                 $_SESSION['person'] = $person;
                 switch ($person['per_status']) {
                     case 1:
-                        $url = 'backend/index.php?page=home';
+                        $url = '../backend/index.php?page=home';
                         break;
                     case 2:
-                        $url = 'backend/index.php?page=home';
+                        $url = '../backend/index.php?page=home';
                         break;
                     case 3:
-                        $url = 'backend/index.php?page=home';
+                        $url = '../backend/index.php?page=home';
                         break;
                     default:
                         break;

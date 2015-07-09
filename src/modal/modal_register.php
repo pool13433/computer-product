@@ -38,7 +38,7 @@
                         <div class="col-sm-2">
                             <input type="hidden" name="input-id" value=""/>
                             <?php
-                            require_once './config/connect.php';
+                            require_once '../config/connect.php';
                             $sql_prefix = " SELECT * FROM prefix ORDER BY pre_name";
                             $query_prefix = mysql_query($sql_prefix) or die(mysql_error());
                             ?>
@@ -117,7 +117,7 @@
             scroll: false,
             onValidationComplete: function (form, status) {
                 if (status) {
-                    post_form('frm-register', 'method/person.php?method=register');
+                    post_form('frm-register', '../method/person.php?method=register');
                 }
             }
         });
