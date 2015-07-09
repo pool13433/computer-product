@@ -98,6 +98,56 @@ $(document).ready(function () {
     });
     // ########### datepicker ##########
 });
+
+function login() {
+    var username = $('#input-username').val();
+    var password = $('#input-password').val();
+    $.ajax({
+        url: './method/person.php?method=login',
+        data: {
+            username: username,
+            password: password
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+            if (data.status == 'success') {
+                var cookie = $('#cookie').val();
+                setCookie('username', username, 365);
+                setCookie('password', password, 365);
+
+                //showNotification('success', data.title, data.msg, 3);
+                showJAlert(data.title, data.msg, 'success');
+                redirectDelay(data.url, 2);
+            } else {
+                showJAlert(data.title, data.msg, 'error');
+                //showNotification('danger', data.title, data.msg, 3);
+            }
+        },
+        /*error: function(xhr, error) {
+         
+         showJAlert('error', 'xhr ::==' + xhr + '\n error ::==' + error, 'error');
+         }, */
+        error: function (jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                showJAlert('error', 'Not connect.\n Verify Network.', 'error');
+            } else if (jqXHR.status == 404) {
+                showJAlert('error', 'Requested page not found. [404]', 'error');
+            } else if (jqXHR.status == 500) {
+                showJAlert('error', 'Internal Server Error [500].', 'error');
+            } else if (exception === 'parsererror') {
+                showJAlert('error', 'Requested JSON parse failed.', 'error');
+            } else if (exception === 'timeout') {
+                showJAlert('error', 'Time out error.', 'error');
+            } else if (exception === 'abort') {
+                showJAlert('error', 'Ajax request aborted.', 'error');
+            } else {
+                showJAlert('error', 'Uncaught Error.\n' + jqXHR.responseText, 'error');
+            }
+        }
+    });
+}
+
 function notify(type, msg, delay) {
     /* var messages = [
      ['bottom-right', 'info', 'Gah this is awesome.'],
@@ -193,54 +243,7 @@ function print_properties_in_object(object) {
     }
     return output;
 }
-function login() {
-    var username = $('#input-username').val();
-    var password = $('#input-password').val();
-    $.ajax({
-        url: './method/person.php?method=login',
-        data: {
-            username: username,
-            password: password
-        },
-        type: 'post',
-        dataType: 'json',
-        success: function (data) {
-            if (data.status == 'success') {
-                var cookie = $('#cookie').val();
-                setCookie('username', username, 365);
-                setCookie('password', password, 365);
 
-                //showNotification('success', data.title, data.msg, 3);
-                showJAlert(data.title, data.msg, 'success');
-                redirectDelay(data.url, 2);
-            } else {
-                showJAlert(data.title, data.msg, 'error');
-                //showNotification('danger', data.title, data.msg, 3);
-            }
-        },
-        /*error: function(xhr, error) {
-         
-         showJAlert('error', 'xhr ::==' + xhr + '\n error ::==' + error, 'error');
-         }, */
-        error: function (jqXHR, exception) {
-            if (jqXHR.status === 0) {
-                showJAlert('error', 'Not connect.\n Verify Network.', 'error');
-            } else if (jqXHR.status == 404) {
-                showJAlert('error', 'Requested page not found. [404]', 'error');
-            } else if (jqXHR.status == 500) {
-                showJAlert('error', 'Internal Server Error [500].', 'error');
-            } else if (exception === 'parsererror') {
-                showJAlert('error', 'Requested JSON parse failed.', 'error');
-            } else if (exception === 'timeout') {
-                showJAlert('error', 'Time out error.', 'error');
-            } else if (exception === 'abort') {
-                showJAlert('error', 'Ajax request aborted.', 'error');
-            } else {
-                showJAlert('error', 'Uncaught Error.\n' + jqXHR.responseText, 'error');
-            }
-        }
-    });
-}
 function logout() {
     var conf = confirm('ยืนยันการออกจากระบบ ใช่ [OK] || ไม่ใช่ [Cancle]');
     if (conf) {

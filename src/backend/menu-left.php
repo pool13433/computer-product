@@ -70,7 +70,7 @@
                                 <a href="index.php?page=list-problem" onclick="setAccordion(this)"><i class="glyphicon glyphicon-bold"></i> รายการอาการเสีย</a>
                             </td>
                         </tr>
-                        <!--<tr>
+                        <tr>
                             <td>
                                 <a href="index.php?page=list-equipment" onclick="setAccordion(this)"><i class="glyphicon glyphicon-folder-close"></i> รายการ อุปกรณ์</a>
                             </td>
@@ -80,7 +80,7 @@
                                 <a href="index.php?page=list-equipment_type" onclick="setAccordion(this)"><i class="glyphicon glyphicon-tasks"></i> รายการ ประเภทอุปกรณ์</a>
                             </td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <td>
                                 <a href="index.php?page=list-color" onclick="setAccordion(this)"><i class="glyphicon glyphicon-unchecked"></i> รายการ สี</a>
                             </td>

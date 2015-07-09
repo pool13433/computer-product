@@ -1,7 +1,4 @@
 <?php
-if (!isset($_SESSION)) {
-    @session_start();
-}
 $person = '';
 $ses_id = '';
 $per_fname = '';

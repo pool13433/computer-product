@@ -1,3 +1,9 @@
+<?php
+if (empty($_SESSION)) {
+    ob_start();
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,10 +72,6 @@
     <body>
         <?php
         include '../config/webapp.php';
-        if (!isset($_SESSION)) {
-            @ob_start();
-            @session_start();
-        }
         ?>
         <?php include './menu-top.php'; ?>
         <div class="container-fluid">            

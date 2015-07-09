@@ -3,11 +3,10 @@
 session_start();
 include '../config/webapp.php';
 include '../config/connect.php';
-
-if (!empty($_SESSION)):
+if (!empty($_SESSION)){
     $person = $_SESSION['person'];
     $ses_id = $person['per_id'];
-endif;
+}
 $msg = '';
 $url = '';
 switch ($_GET['method']) {
